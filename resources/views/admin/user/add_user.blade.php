@@ -216,7 +216,7 @@
             getDesignation();
         };
 
-        // form validation ruls
+    // form validation ruls
         $("#user-add-form").validate({
             // Specify validation rules
             rules: {

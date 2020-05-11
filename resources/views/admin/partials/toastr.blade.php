@@ -1,8 +1,10 @@
 <script src="{{ asset('/vendor/toastr/toastr.min.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/toastr/toastr.min.css') }}">
 
-@if(Session::has('message'))
-var type = "{{ Session::get('alert-type', 'info') }}";
+<script>
+    @if(Session::has('message'))
+var type
+= "{{ Session::get('alert-type', 'info') }}";
 switch(type){
     case 'info':
         toastr.info('{{ Session::get('message') }}','Info');
@@ -21,3 +23,4 @@ switch(type){
         break;
     }
 @endif
+</script>
