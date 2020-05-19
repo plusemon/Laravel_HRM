@@ -50,9 +50,9 @@
                             <td>{{ $user->country }}</td>
                             <td>{{ $user->blood_group }}</td>
                             <td>
-                                <a href="admin-edit-user">
+                                <a href="{{ url('admin/users/') }}/{{ $user->id }}/edit">
                                     <button type="button" class="btn btn-warning"><i class="fas fa-user-edit">Edit</i></button></a>
-                                <a href="admin-user-view-user_profile">
+                                <a href="{{ url('admin/users/') }}/{{ $user->id }}">
                                     <button type="button" class="btn btn-success"><li class="far fa-eye">View</li></button>
                                 </a>
                             </td>

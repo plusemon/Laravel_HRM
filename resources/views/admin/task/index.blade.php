@@ -6,7 +6,7 @@
             <h1 class="h3 mb-0 text-gray-800">Task Tables</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="admin">Dashboard</a></li>
-              
+
               <li class="breadcrumb-item active" aria-current="page">Task</li>
             </ol>
           </div>
@@ -16,7 +16,7 @@
             <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <a href="admin-task-add-task"><button type="button" class="btn btn-success" data-toggle="modal">Add Task</button></a>
+                  <a href="{{ url('admin/task/create') }}"><button type="button" class="btn btn-success" data-toggle="modal">Add Task</button></a>
                 </div>
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
@@ -58,10 +58,7 @@
     </div>
   </div>
 
-  <!-- Scroll to top -->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
+
 
 
 
@@ -84,7 +81,7 @@
               <label class="mb-3 font-weight-bold">Subject</label>
               <input class="form-control  mb-3" type="text" placeholder="Subject">
 
-              <label class="mb-3 font-weight-bold">Duration</label>       
+              <label class="mb-3 font-weight-bold">Duration</label>
               <select class="form-control mb-3 font-weight-bold">
                       <option>1 Week</option>
                       <option>1 Month</option>
@@ -94,7 +91,7 @@
                     </select>
               <label class="mb-3 font-weight-bold">Description</label>
               <textarea  rows="8" textarea class="form-control mb-3"></textarea>
-              
+
               <label class="mb-3 font-weight-bold">Status</label>
               <select class="form-control mb-3 font-weight-bold" placeholder="Status">
                       <option>Pending</option>
@@ -111,6 +108,9 @@
   </div>
 </div>
           </form>
-
+<!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 @endsection
 

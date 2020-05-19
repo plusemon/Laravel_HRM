@@ -1,32 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
-use RealRashid\SweetAlert\Facades\Alert;
+namespace App\Http\Controllers\Admin;
 use Session;
-
 use App\Department;
+
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
+
 class DepartmentController extends Controller
 {
     /*-----Department Index Show Called This GET Route-----*/
     public function index()
     {
         //
-        $departments=Department::orderBy('id','ASC')->get();
+        $departments=Department::all();
         return view('admin.system.department.index',['departments'=>$departments]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /*-----Department Store Show Called This POST Route-----*/
     public function store(Request $request)
@@ -42,7 +35,7 @@ class DepartmentController extends Controller
 
         if ($validator->fails()) {
             Alert::error('Oops!','The Department Field Is Required Only Minimum 2 Character Allow,Duplicate Values Are Not Allow');
-            return redirect('/admin-system-department')
+            return redirect('/departments')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -54,33 +47,11 @@ class DepartmentController extends Controller
             $departments->first_desgn = $request->input('first_desgn');
             $departments->second_desgn = $request->input('second_desgn');
             $departments->Save();
-            $message = toast('Department Added Successfully!','success');
-            return redirect('/admin-system-department')->withMessage('success','Your Post as been submited!');
+            toast('Department Added Successfully!','success');
+            return redirect('admin/departments')->with('success','Your Post as been submited!');
 
         }
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Department  $department
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Department $department)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Department  $department
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Department $department)
-    {
-        //
     }
 
     /*-----Department Update Show Called This POST Route-----*/
@@ -88,7 +59,7 @@ class DepartmentController extends Controller
     {
         //
         $validator=Validator::make($request->all(), [
-            'dept_name' => 'required|unique:departments|regex:/^[a-zA-Z\s]*$/|min:2',
+            'dept_name' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
             'first_desgn' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
             'second_desgn' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
 
@@ -97,7 +68,7 @@ class DepartmentController extends Controller
 
         if ($validator->fails()) {
             Alert::error('Oops!', 'The Department Field Is Required Only Minimum 2 Letters Allow,Duplicate Values Not Allow');
-            return redirect('/admin-system-department')
+            return redirect('admin/departments')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -111,7 +82,7 @@ class DepartmentController extends Controller
             $departments->second_desgn = $request->input('second_desgn');
             $departments->Save();
             toast('Department Update Successfully!','success');
-            return redirect('/admin-system-department')->with('success','Your Post as been submited!');
+            return redirect('admin/departments')->with('success','Your Post as been submited!');
         }
     }
 
@@ -124,7 +95,7 @@ class DepartmentController extends Controller
         $departments=Department::find($id);
         $departments->delete();
         toast('Department Deleted Successfully', 'success');
-        return redirect('/admin-system-department')->with('salary','Department Deleted Successfully');
+        return redirect('admin/departments')->with('salary','Department Deleted Successfully');
 
     }
 }

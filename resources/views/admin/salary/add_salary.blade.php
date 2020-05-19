@@ -20,11 +20,11 @@
                     id="#addSalaryAmount">Add Salary</button>
                 </div>
 
-                
+
 
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                    
+
                     <thead class="thead-light">
                       <tr>
                         <th>No</th>
@@ -41,9 +41,9 @@
                         <td>{{ $salary-> salary_amount }}</td>
                         <td>{{ $salary-> created_at }}</td>
                         <td>
-                          <button data-salary_id="{{ $salary->id }}" data-salary_amount="{{ $salary-> salary_amount }}" data-created_at="{{ $salary-> created_at }}" data-target="#updateSalary" id="#updateSalaryAmount" type="button" class="btn btn-warning" data-toggle="modal" 
+                          <button data-salary_id="{{ $salary->id }}" data-salary_amount="{{ $salary-> salary_amount }}" data-created_at="{{ $salary-> created_at }}" data-target="#updateSalary" id="#updateSalaryAmount" type="button" class="btn btn-warning" data-toggle="modal"
                       ><i class="fas fa-user-edit">Update</i></button>
-                    <button data-salary_id="{{ $salary->id }}" data-target="#deleteSalary" id="#deleteSalaryAmount" type="button" class="btn btn-danger" data-toggle="modal" 
+                    <button data-salary_id="{{ $salary->id }}" data-target="#deleteSalary" id="#deleteSalaryAmount" type="button" class="btn btn-danger" data-toggle="modal"
                       ><i class="fas fa-trash">Delete</i>
                     </button>
                   </td>
@@ -62,7 +62,7 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-                            
+
 
 <!--Add Salary Modal Center -->
 <div class="modal fade" id="addSalary" tabindex="-1" role="dialog"
@@ -76,7 +76,7 @@
                   </button>
                 </div>
 
-                <form action="admin-salary-insert" method="POST" enctype="multipart/form-data">
+                <form action="{{url('admin/salaries')}}" method="POST" enctype="multipart/form-data">
                   @csrf()
                   <div class="modal-body">
                    <input name="salary_amount" class="form-control  mb-3" type="text" placeholder="Add Salary">
@@ -104,9 +104,10 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
             </div>
-            <form action="admin-salary-update" method="POST" enctype="multipart/form-data">
-              @csrf()
-              
+            <form action="{{url('admin/salaries/update')}}" method="POST" enctype="multipart/form-data">
+              @csrf
+              @method('put')
+
               <div class="modal-body">
                <input type="hidden" name="salary_id" id="salary_id">
                 <label class="font-weight-bold">Salary Amount</label>
@@ -131,8 +132,9 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                  <form action="admin-salary-delete" method="POST" enctype="multipart/form-data">
-                  @csrf()
+                  <form action="{{url('admin/salaries/destroy')}}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  @method('DELETE')
                     <div class="modal-body">
                       <input type="hidden" name="salary_id" id="salary_id">
                       Are You Sure,You Want To Delete This Salary Amount?

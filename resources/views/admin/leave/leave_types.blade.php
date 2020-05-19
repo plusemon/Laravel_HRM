@@ -12,7 +12,7 @@
           </div>
         </div>
     <div class="row">
-            <!-- DataTable with Hover -->
+            <!--Leave Type DataTable with Hover -->
             <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -30,46 +30,34 @@
                         <th>Action</th>
                       </tr>
                     </thead>
-                    <tfoot>
-                      <tr>
-                        <th>No</th>
-                        <th>Leave</th>
-                        <th>Number Of Leaves</th>
-                        <th>Created On</th>
-                        <th>Action</th>
-                      </tr>
-                    </tfoot>
                     <tbody>
-
+                      @php($i=1)
+                      @foreach($leave_types as $leaveTypes)
                       <tr>
-                        <td>1</td>
-                        <td>Customer Support</td>
-                        <th>Created On</th>
-                        <td>New York</td>
-                        <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateLeave"
-                    	id="#updateLeaveTypes"><i class="fas fa-user-edit">Update</i></button>
-                		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteSalary"
-                    	id="#deleteSalaryAmount"><i class="fas fa-trash">Delete</i></button>
+                        <td>{{$i++}}</td>
+                        <td>{{ $leaveTypes -> leave_typ }}</td>
+                        <th>{{ $leaveTypes -> num_leaves }}</th>
+                        <th>{{ $leaveTypes -> created_at }}</th>
+                        <td>
+
+                          <button data-leave_types_id="{{$leaveTypes->id}}" data-leave_typ="{{$leaveTypes->leave_typ}}" data-num_leaves="{{$leaveTypes->num_leaves}}"
+                          type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateLeave"
+                          id="#updateLeaveTypes">
+                          <i class="fas fa-user-edit">Update</i></button>
+
+
+                            <button type="submit" class="btn btn-danger" data-leave_types_id="{{$leaveTypes->id}}" data-toggle="modal" data-target="#deleteLeave"
+                                id="#deleteLeaveTypes">Delete</button>
+
                     	</td>
                       </tr>
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
           </div>
-          <!--Row-->
-        </div>
-        <!---Container Fluid-->
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Scroll to top -->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
 
   <!--Add Salary Modal Center -->
 <div class="modal fade" id="addLeave" tabindex="-1" role="dialog"
@@ -82,21 +70,23 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
+                <form action="{{url('admin/leave_types')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
                 <div class="modal-body">
-                   <input class="form-control  mb-3" type="text" placeholder="Add Leave Types">
-                   <input class="form-control  mb-3" type="text" placeholder="Number Of Leave">
+                   <input name="leave_typ" class="form-control  mb-3" type="text" placeholder="Add Leave Types">
+                   <input name="num_leaves" class="form-control  mb-3" type="Number" placeholder="Number Of Leave">
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-success">Save</button>
+                  <button type="submit" class="btn btn-success">Save</button>
                 </div>
+              </form>
               </div>
             </div>
           </div>
 
-          <!--Update Salary Modal Center -->
-          <form>
-          	<div class="modal fade" id="updateLeave" tabindex="-1" role="dialog"
+          <!--Update Leave Type Modal Center -->
+ <div class="modal fade" id="updateLeave" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -106,18 +96,53 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
             </div>
-          <div class="modal-body">
-              <input class="form-control  mb-3" type="text" placeholder="Update Leave Types">
-              <input class="form-control  mb-3" type="text" placeholder="Update Number Of Leaves">
-        </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-warning">Update</button>
-    </div>
+            <form action="{{url('admin/leave_types/update')}}" method="POST" enctype="multipart/form-data">
+              @csrf
+              @method('put')
+              <div class="modal-body">
+                <input type="hidden" name="leave_types_id" id="leave_types_id">
+                  <input name="leave_typ" id="leave_typ" class="form-control  mb-3" type="text" placeholder="Update Leave Types">
+                  <input name="num_leaves" id="num_leaves" class="form-control  mb-3" type="number" placeholder="Update Number Of Leaves">
+              </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-warning">Update</button>
+            </div>
+          </form>
   </div>
   </div>
 </div>
-          </form>
 
+<!--Delete Leave Type Modal Center -->
+      <div class="modal fade" id="deleteLeave" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteLeaveTypes">Delete Leave Type</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                  <form action="{{ url ('admin/leave_types/destroy') }}"
+                  method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-body">
+                      <input type="hidden" name="leave_types_id" id="leave_types_id">
+                      Are You Sure,You Want To Delete This Leave Type?
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                      <button type="submit" class="btn btn-danger">Yes</button>
+                    </div>
+              </form>
+        </div>
+      </div>
+    </div>
+          <!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 @endsection
-

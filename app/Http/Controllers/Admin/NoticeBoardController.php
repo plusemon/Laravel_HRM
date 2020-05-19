@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
-use RealRashid\SweetAlert\Facades\Alert;
+namespace App\Http\Controllers\Admin;
 use Session;
-
 use App\NoticeBoard;
+
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 
 class NoticeBoardController extends Controller
@@ -22,7 +23,7 @@ class NoticeBoardController extends Controller
     /*-----ADD Notice Board Index Show Called This GET Route-----*/
     public function add_notice_view()
     {
-    
+
         return view('admin.notice.add_notice');
     }
 
@@ -32,7 +33,7 @@ class NoticeBoardController extends Controller
     {
         //
         $validator=Validator::make($request->all(), [
-            'notice_title' => 
+            'notice_title' =>
             'required|unique:notice_boards|regex:/^[a-zA-Z\s]*$/|min:4',
             'notice_description' => 'required|max:1024',
 

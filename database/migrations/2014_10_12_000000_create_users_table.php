@@ -25,14 +25,16 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('user_type');
             $table->string('email',100)->unique();
-            $table->string('password');
+            $table->string('password')->default('1234456');
             $table->bigInteger('nid');
             $table->string('department');
             $table->string('designation');
             $table->unsignedBigInteger('salary');
+            $table->unsignedBigInteger('salary_paid')->nullable();
             $table->string('country');
             $table->string('join_date');
             $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('status')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

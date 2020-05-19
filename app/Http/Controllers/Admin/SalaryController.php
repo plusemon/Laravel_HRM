@@ -1,22 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
-use RealRashid\SweetAlert\Facades\Alert;
-
-use App\Salary;
+namespace App\Http\Controllers\Admin;
 use Session;
+
+use App\User;
+use App\Salary;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
+
 class SalaryController extends Controller
 {
-    
+
    /*-----Salary Index Show Called This GET Route-----*/
     public function index()
     {
-        //
-        $salaries=Salary::orderBy('id','ASC')->get();
-        return view('admin.salary.add_salary',['salaries'=>$salaries]);
+        $salaries = Salary::all();
+        return view('admin.salary.add_salary', compact('salaries'));
     }
 
 
@@ -35,14 +37,14 @@ class SalaryController extends Controller
     public function store(Request $request)
     {
         //
-        
+
         $validator=Validator::make($request->all(), [
             'salary_amount' => 'required|unique:salaries|integer|min:4',
         ]);
 
         if ($validator->fails()) {
             Alert::error('Oops!','The Salary Field Is Required Only Minimum 4 Digits Allow,Duplicate Values Are Not Allow');
-            return redirect('/admin-salary')
+            return redirect('admin/salaries')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -53,7 +55,7 @@ class SalaryController extends Controller
              toast('Salary Added Successfully!','success');
             //Alert::success('Saved', 'Salary Added Successfully')->toToast();
             //Alert::success('Post Created', 'Successfully');
-            return redirect('/admin-salary')->with('success','Your Post as been submited!');
+            return redirect('admin/salaries')->with('success','Your Post as been submited!');
         }
 
     }
@@ -94,7 +96,7 @@ class SalaryController extends Controller
 
         if ($validator->fails()) {
             Alert::error('Oops!', 'The Salary Field Is Required Only Minimum 4 Digits Allow,Duplicate Values Not Allow');
-            return redirect('/admin-salary')
+            return redirect('admin/salaries')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -106,10 +108,10 @@ class SalaryController extends Controller
             $salaries->salary_amount=$request->input('salary_amount');
             $salaries->save();
             toast('Salary Update Successfully!', 'success');
-            return redirect('/admin-salary')->with('Success', 'Salary Update Successfully');
+            return redirect('admin/salaries')->with('Success', 'Salary Update Successfully');
 
         }
-            
+
     }
 
     /*-----Salary Data Delete Called This POST Function-----*/
@@ -119,7 +121,7 @@ class SalaryController extends Controller
         $salaries=Salary::find($id);
         $salaries->delete();
         toast('Salary Deleted Successfully', 'success');
-        return redirect('/admin-salary')->with('salary','Salary Deleted Successfully');
+        return redirect('admin/salaries')->with('salary','Salary Deleted Successfully');
     }
 
 }

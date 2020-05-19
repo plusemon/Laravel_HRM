@@ -6,7 +6,7 @@
             <h1 class="h3 mb-0 text-gray-800">Award Tables</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="admin">Dashboard</a></li>
-              
+
               <li class="breadcrumb-item active" aria-current="page">Award</li>
             </ol>
           </div>
@@ -15,8 +15,8 @@
             <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <a href="admin-award-categories"><button type="button" class="btn btn-success" data-toggle="modal">Award Categories</button></a>
-                  <a href="admin-award-add-awards"><button type="button" class="btn btn-success" data-toggle="modal">Give an Award</button></a> 
+                  <a href="{{url('/award_categories')}}"><button type="button" class="btn btn-success" data-toggle="modal">Award Categories</button></a>
+                  <a href="admin-award-add-awards"><button type="button" class="btn btn-success" data-toggle="modal">Give an Award</button></a>
                 </div>
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
@@ -121,12 +121,12 @@
                         <option>October</option>
                         <option>November</option>
                         <option>December</option>
-                      </select> 
+                      </select>
                     </div>
 
                     <div class="form-group">
                       <label>Year</label>
-                      <input type="number" name="award_year" class="form-control font-weight-bold" required> 
+                      <input type="number" name="award_year" class="form-control font-weight-bold" required>
                     </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -148,7 +148,7 @@
                   </button>
                 </div>
                   <form action="" method="POST" enctype="multipart/form-data">
-    
+
                     <div class="modal-body">
                       Are You Sure,You Want To Delete This Give an Award?
                     </div>
@@ -161,7 +161,7 @@
             </div>
           </div>
         </div>
- 
+
   <!-- Scroll to top -->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>

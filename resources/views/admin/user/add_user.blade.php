@@ -11,7 +11,7 @@
         </ol>
     </div>
 </div>
-<form action="{{ url('admin-add-user') }}" method="POST" enctype="multipart/form-data" id="user-add-form">
+<form action="{{ url('admin/users') }}" method="POST" enctype="multipart/form-data" id="user-add-form">
     @csrf
     <div class="row">
         <div class="col-lg-6">
@@ -24,10 +24,10 @@
                         <div class="col-lg-12">
                             {{-- Ajax picture --}}
                             <div class="profile-img">
-                                <img id="image_preview_container" src="img/avatar.svg" class="rounded-circle" />
+                                <img id="image_preview_container" src="{{ asset('img/avatar.svg') }}" class="rounded-circle" />
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
-                                    <input type="file" name="avater" id="image">
+                                    <input type="file" name="user_avater" id="image">
                                 </div>
                             </div>
                         </div>
@@ -113,11 +113,6 @@
                         <label for="">Email</label>
                         <input type="email" name="email" id="email" class="form-control" onkeyup="checkEmail();">
                         <p id="email-exist" class="error"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Password</label>
-                        <input type="text" name="password" class="form-control">
                     </div>
 
                     <div class="form-group">
@@ -216,7 +211,7 @@
             getDesignation();
         };
 
-    // form validation ruls
+        // form validation ruls
         $("#user-add-form").validate({
             // Specify validation rules
             rules: {
@@ -282,7 +277,7 @@
      //  set designation by department
      function getDesignation() {
         var department = $('#department').val();
-        var url = '{{ url('/get-designation') }}?department=' + department;
+        var url = '{{ url('admin/get-designation') }}?department=' + department;
         $.ajax({
             type: "GET",
             url: url,
@@ -300,7 +295,7 @@
      //  CHECK EMAIL
      function checkEmail() {
         var email = $('#email').val();
-        var url = '{{ url('/check-email') }}?email='+email;
+        var url = '{{ url('admin/check-email') }}?email='+email;
         $.ajax({
             type: "GET",
             url: url,
@@ -318,7 +313,7 @@
      //  CHECK id
      function checkId() {
         var id = $('#id').val();
-        var url = '{{ url('/check-id') }}?id='+id;
+        var url = '{{ url('admin/check-id') }}?id='+id;
         $.ajax({
             type: "GET",
             url: url,

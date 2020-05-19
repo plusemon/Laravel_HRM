@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\User;
+use App\Salary;
 use App\Country;
 use App\Department;
-use App\Salary;
-use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use PhpParser\Builder\Use_;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -79,6 +80,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        return view('admin.user.view_user_profile', compact('id'));
         //
     }
 
@@ -90,7 +92,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.user.edit_user', compact('id'));
+
     }
 
     /**

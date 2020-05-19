@@ -68,12 +68,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title" id="addAwardCategoriesModal">Add Leave Types</h5>
+                  <h5 class="modal-title" id="addAwardCategoriesModal">Award Categories</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <form action="admin-award-categories-insert" method="POST" enctype="multipart/form-data">
+                <form action="{{url('award_categories/insert')}}" method="POST" enctype="multipart/form-data">
                 @csrf()
 
                 <div class="modal-body">
@@ -105,7 +105,7 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
             </div>
-        <form action="admin-award-categories-update" method="POST" enctype="multipart/form-data">
+        <form action="{{url('award_categories/update')}}" method="POST" enctype="multipart/form-data">
                 @csrf()
 
           <div class="modal-body">
@@ -134,7 +134,7 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                  <form action="admin-award-categories-delete" method="POST" enctype="multipart/form-data">
+                  <form action="{{url('award_categories/delete')}}" method="POST" enctype="multipart/form-data">
                     @csrf()
                     <div class="modal-body">
                       <input type="hidden" name="award_category_id" id="award_category_id">

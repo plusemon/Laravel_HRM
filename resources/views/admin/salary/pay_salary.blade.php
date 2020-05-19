@@ -1,9 +1,111 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+@extends('layouts.admin')
+@section('admin')
+<!-- Container Fluid-->
+<div class="container-fluid" id="container-wrapper">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Add User</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="admin">Dashboard</a></li>
+            <li class="breadcrumb-item">Salary</li>
+            <li class="breadcrumb-item active" aria-current="page">Payment Salary</li>
+        </ol>
+    </div>
+</div>
 
-</body>
-</html>
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- Add Payment Details Section -->
+            <div class="card mb-4 ml-3">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Payment Salary</h6>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url('salary-pay') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label>User ID</label>
+                            <div class="fas fa-user"></div>
+                            <select class="form-control" name="user_id" id="user_id">
+                                @foreach($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Month</label>
+                            <select class="form-control" name="month">
+                                <option>Select Month</option>
+                        		<option value="january">January</option>
+                        		<option value="february">February</option>
+                        		<option value="march">March</option>
+                        		<option value="april">April</option>
+                        		<option value="may">May</option>
+                        		<option value="june">June</option>
+                        		<option value="july">July</option>
+                        		<option value="august">August</option>
+                        		<option value="september">September</option>
+                        		<option value="october">October</option>
+                        		<option value="november">November</option>
+                        		<option value="december">December</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                        	<button type="submit" class="btn btn-success">Payment</button>
+                        </div>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <!--Attandence DataTable with Hover Section-->
+            <div class="col-lg-12">
+              <div class="card mb-4">
+                <div class="table-responsive p-3">
+                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                  	<h5>Payment Details</h5>
+                    <thead class="thead-light">
+                      <tr>
+                        <th>User ID</th>
+                        <th>User Name</th>
+                        <th>Department</th>
+                        <th>Payment Salary</th>
+                        <th>Month</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <tr>
+                        <td>1</td>
+                        <td>Customer Support</td>
+                        <td>Customer Support</td>
+                        <td>New York</td>
+                        <td>New York</td>
+                        <td><button type="button" class="btn btn-warning" data-toggle="modal">Update Payment</button>
+                    	<button type="button" class="btn btn-danger" data-toggle="modal">Delete Payment</button>
+                    	</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+<!-- Scroll to top -->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+@endsection

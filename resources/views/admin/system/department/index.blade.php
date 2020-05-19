@@ -80,8 +80,8 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <form action="admin-system-department-insert" method="POST" enctype="multipart/form-data">
-                  @csrf()
+                <form action="{{url('admin/departments')}}" method="POST" enctype="multipart/form-data">
+                  @csrf
                 <div class="modal-body">
                    <input name="dept_name" class="form-control  mb-3" type="text" placeholder="Add Department Name">
                    <input name="first_desgn" class="form-control  mb-3" type="text" placeholder="Add Designation 1">
@@ -107,8 +107,9 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
             </div>
-        <form action="admin-system-department-update"method="POST" enctype="multipart/form-data">
-            @csrf()
+        <form action="{{url('admin/departments/update')}}"method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('put')
           <div class="modal-body">
               <input type="hidden" name="dept_id" id="dept_id">
               <label class="font-weight-bold">Department Name</label>
@@ -138,8 +139,9 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                  <form action="admin-system-department-delete" method="POST" enctype="multipart/form-data">
+                  <form action="{{url('admin/departments/destroy')}}" method="POST" enctype="multipart/form-data">
                   @csrf()
+                  @method('DELETE')
                     <div class="modal-body">
                       <input type="hidden" name="dept_id" id="dept_id">
                       Are You Sure,You Want To Delete This Department?
@@ -157,5 +159,8 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
 @endsection
+
+
+
+

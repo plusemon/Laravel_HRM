@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
-use RealRashid\SweetAlert\Facades\Alert;
-
-use App\AwardCategory;
+namespace App\Http\Controllers\Admin;
 use Session;
 
+use App\AwardCategory;
 use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
+
 class AwardCategoryController extends Controller
 {
     /*-----AwardCategory Index Show Called This GET Route-----*/
@@ -40,10 +42,10 @@ class AwardCategoryController extends Controller
         'award_description' => 'required|max:800',
 
         ]);
-        
+
         if ($validator->fails()) {
             Alert::error('Oops!','The Award Categories Field Is Required Only Minimum 4 Letters Allow,Duplicate Values Are Not Allow');
-            return redirect('/admin-award-categories')
+            return redirect('/award_categories')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -55,7 +57,7 @@ class AwardCategoryController extends Controller
             $award_categories->award_description = $request->input('award_description');
             $award_categories->Save();
             toast('Award Categories Added Successfully!','success');
-            return redirect('/admin-award-categories')->with('success','Your Post as been submited!');
+            return redirect('/award_categories')->with('success','Your Post as been submited!');
 
         }
     }
@@ -87,7 +89,7 @@ class AwardCategoryController extends Controller
     {
         //
         $validator=Validator::make($request->all(), [
-            'award_category' => 'required|unique:award_categories|regex:/^[a-zA-Z\s]*$/|min:4',
+            'award_category' => 'required|regex:/^[a-zA-Z\s]*$/|min:4',
             'award_description' => 'required|max:800',
 
 
@@ -95,7 +97,7 @@ class AwardCategoryController extends Controller
 
         if ($validator->fails()) {
             Alert::error('Oops!', 'The Award Categories Field Is Required Only Minimum 4 Letters Allow,Duplicate Values Not Allow');
-            return redirect('/admin-award-categories')
+            return redirect('/award_categories')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -108,7 +110,7 @@ class AwardCategoryController extends Controller
             $award_categories->award_description = $request->input('award_description');
             $award_categories->Save();
             toast('Award Categories Update Successfully!','success');
-            return redirect('/admin-award-categories')->with('success','Your Post as been submited!');
+            return redirect('/award_categories')->with('success','Your Post as been submited!');
         }
     }
 
@@ -120,6 +122,6 @@ class AwardCategoryController extends Controller
         $award_categories=AwardCategory::find($id);
         $award_categories->delete();
         toast('Award Categories Deleted Successfully', 'success');
-        return redirect('/admin-award-categories')->with('salary','Department Deleted Successfully');
+        return redirect('/award_categories')->with('salary','Department Deleted Successfully');
     }
 }

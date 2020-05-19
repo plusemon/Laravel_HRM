@@ -14,37 +14,21 @@
             <!--Leave Application DataTable with Hover -->
             <div class="col-lg-12">
               <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <a href="#"><button type="button" class="btn btn-success" data-toggle="modal">Add Leave Application</button></a> 
-                </div>
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
-                        <th>Employee ID</th>
+                        <th>User ID</th>
                         <th>Name</th>
                         <th>Date</th>
                         <th>Leave Type</th>
                         <th>Reason</th>
                         <th>Applied On</th>
                         <th>Number Of Leave</th>
-                        <th>Status</th>
+                        <th>Request Status</th>
                         <th>Action</th>
                       </tr>
                     </thead>
-                    <tfoot>
-                      <tr>
-                        <th>Employee ID</th>
-                        <th>Name</th>
-                        <th>Date</th>
-                        <th>Leave Types</th>
-                        <th>Reason</th>
-                        <th>Applied On</th>
-                        <th>Number Of Leave</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </tfoot>
                     <tbody>
 
                       <tr>
@@ -54,11 +38,14 @@
                         <td>1</td>
                         <td>1</td>
                         <td>Customer Support</td>
-                        <td>Pending</td>
-                        <td>Pending</td>
-                        <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateLeaveApplication"
+                        <td>7</td>
+                        <td>
+                          <button type="button" class="btn btn-success">Accept</button>
+                          <button type="button" class="btn btn-danger">Reject</button>
+                        </td>
+                        <td><button type="button" class="btn btn-warning" data-toggle="modal" data-leave_id="1" data-target="#updateLeaveApplication"
                     	id="#updateLeaveApplicationBoard"><i class="fas fa-user-edit">Update</i></button>
-                		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteLeaveApplication"
+                		<button type="button" class="btn btn-danger" data-leave_id="1" data-toggle="modal" data-target="#deleteLeaveApplication"
                     	id="#deleteLeaveApplicationBoard"><i class="fas fa-trash">Delete</i></button>
                     	</td>
                       </tr>

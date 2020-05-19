@@ -71,8 +71,8 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <form action="admin-system-country-insert"method="POST" enctype="multipart/form-data">
-                @csrf()
+                <form action="{{url('admin/countries')}}"method="POST" enctype="multipart/form-data">
+                @csrf
 
                   <div class="modal-body">
                       <input name="country_name" class="form-control  mb-3" type="text" placeholder="Add Country Name">
@@ -99,9 +99,9 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
             </div>
-            <form action="admin-system-country-update"method="POST" enctype="multipart/form-data">
-                @csrf()
-
+            <form action="{{url('admin/countries/update')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('put')
           <div class="modal-body">
             <input type="hidden" name="country_id" id="country_id">
             <label class="font-weight-bold">Country Name</label>
@@ -128,8 +128,9 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                  <form action="admin-system-country-delete" method="POST" enctype="multipart/form-data">
-                  @csrf()
+                  <form action="{{url('admin/countries/destroy')}}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  @method('DELETE')
                     <div class="modal-body">
                       <input type="hidden" name="country_id" id="country_id">
                       Are You Sure,You Want To Delete This Country?
