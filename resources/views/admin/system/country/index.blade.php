@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-  @section('admin')
+  @section('main')
   <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -35,9 +35,9 @@
                       @foreach($countries as $countries)
                       <tr>
                         <td>{{$i++}}</td>
-                        <td>{{$countries->country_name}}</td>
+                        <td>{{$countries->name}}</td>
                         <td>{{$countries->created_at}}</td>
-                        <td><button data-country_id="{{$countries->id}}" data-country_name="{{$countries->country_name}}" data-created_at="{{$countries->created_at}}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateCountry"
+                        <td><button data-country_id="{{$countries->id}}" data-name="{{$countries->name}}" data-created_at="{{$countries->created_at}}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateCountry"
                       id="#updateCountryName"><i class="fas fa-user-edit">Update</i></button>
                     <button data-country_id="{{$countries->id}}" type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteCountry"
                       id="#deleteCountryName"><i class="fas fa-trash">Delete</i></button>
@@ -75,7 +75,7 @@
                 @csrf
 
                   <div class="modal-body">
-                      <input name="country_name" class="form-control  mb-3" type="text" placeholder="Add Country Name">
+                      <input name="name" class="form-control  mb-3" type="text" placeholder="Add Country Name">
                   </div>
 
                   <div class="modal-footer">
@@ -105,7 +105,7 @@
           <div class="modal-body">
             <input type="hidden" name="country_id" id="country_id">
             <label class="font-weight-bold">Country Name</label>
-            <input name="country_name" id="country_name" class="form-control  mb-3" type="text" placeholder="Update Country Name">
+            <input name="name" id="name" class="form-control  mb-3" type="text" placeholder="Update Country Name">
         </div>
 
       <div class="modal-footer">
@@ -150,3 +150,27 @@
   </a>
 @endsection
 
+@section('scripts')
+/*-----Country Modal Update Scripts-----*/
+    <script>
+    $('#updateCountry').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var country_id = button.data('country_id')
+        var name = button.data('name')
+        var created_at = button.data('created_at')
+        var modal = $(this)
+        modal.find('.modal-title').text('Update Country Name')
+        modal.find('.modal-body #country_id').val(country_id);
+        modal.find('.modal-body #name').val(name);
+        modal.find('.modal-body #created_at').val(created_at);
+    });
+        /*-----Country Modal Delete Scripts-----*/
+    $('#deleteCountry').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var country_id = button.data('country_id')
+        var modal = $(this)
+        modal.find('.modal-title').text('Delete Country Name')
+        modal.find('.modal-body #country_id').val(country_id);
+    });
+</script>
+@endsection

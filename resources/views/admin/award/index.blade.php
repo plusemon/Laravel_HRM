@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-  @section('admin')
+  @section('main')
   <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -168,3 +168,30 @@
   </a>
 @endsection
 
+@section('scripts')
+<script>
+    /*-----Update AwardCategories Modal Update Scripts-----*/
+$('#updateAwardCategories').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget)
+  var award_category = button.data('award_category')
+  var award_description = button.data('award_description')
+  var award_category_id = button.data('award_category_id')
+  var modal = $(this)
+  modal.find('.modal-title').text('Update Department Name')
+  modal.find('.modal-body #award_category').val(award_category);
+  modal.find('.modal-body #award_description').val(award_description);
+  modal.find('.modal-body #award_category_id').val(award_category_id);
+
+
+});
+  /*-----Delete AwardCategories Modal Delete Scripts-----*/
+$('#deleteAwardCategories').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget)
+  var award_category_id = button.data('award_category_id')
+  var modal = $(this)
+  modal.find('.modal-title').text('Delete Department Name')
+  modal.find('.modal-body #award_category_id').val(award_category_id);
+
+});
+</script>
+@endsection

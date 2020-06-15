@@ -15,24 +15,23 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_avater')->default('img/avatar.svg');
+            $table->string('avater')->default('avater/avater.svg');
             $table->string('name');
-            $table->string('fathers_name');
+            $table->string('father');
             $table->string('date_of_birth');
             $table->string('gender');
-            $table->string('blood_group');
-            $table->bigInteger('mobile_number');
+            $table->string('blood');
+            $table->string('mobile');
             $table->string('address');
-            $table->string('user_type');
+            $table->string('type');
             $table->string('email',100)->unique();
-            $table->string('password')->default('1234456');
+            $table->string('password')->default('$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'); // password
             $table->bigInteger('nid');
             $table->string('department');
             $table->string('designation');
             $table->unsignedBigInteger('salary');
-            $table->unsignedBigInteger('salary_paid')->nullable();
             $table->string('country');
-            $table->string('join_date');
+            $table->string('join');
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('status')->nullable();
             $table->rememberToken();

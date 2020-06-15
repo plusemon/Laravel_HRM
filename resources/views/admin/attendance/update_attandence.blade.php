@@ -1,0 +1,96 @@
+@extends('layouts.admin')
+  @section('main')
+{{-- <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"> --}}
+{{-- <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> --}}
+
+<!-- Add Attandence Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Edit Attandence</h1>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="admin">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">View Attandence</li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Attandence</li>
+                </ol>
+            </div>
+
+            <div class="row">
+                <!--Add Attandence DataTable with Hover Section-->
+                <div class="col-lg-12 text-center">
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <div class="form-group col-6 m-auto">
+                      <h3>Edit Attandence => {{ $att_date }}</h3>
+                  </div>
+            </div>
+              <div class="card mb-4">
+
+                <div class="table-responsive p-3">
+                  <table class="table align-items-center table-flush table-hover">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Date</th>
+                        <th>User ID</th>
+                        <th>User Name</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($attandences as $attandence)
+                            <tr>
+                            <td>{{ $attandence->att_date }}</td>
+                            <td>{{ $attandence->user_id }}</td>
+                            <td>{{ $attandence->user->name }}</td>
+                            <td>{{ $attandence->attendence }}</td>
+                            <td>
+                              <a class=""
+                            </td>
+                        </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5">
+                                    <h3>No Attandence Found</h3>
+
+                                </td>
+                           </tr>
+                        @endforelse
+
+                    </tbody>
+                </table>
+                </div>
+              </div>
+        </div>
+    </div>
+  <!--Add Attandence Modal Center -->
+  <div class="modal fade" id="addAttandence" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+
+             <div class="modal-header">
+                  <h5 class="modal-title" id="addAttandenceBoard">Add Attandence</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+              </div>
+
+                <div class="modal-body">
+                    <label class="mb-3 font-weight-bold">Add Attandence Date</label>
+                    <input class="form-control  mb-3" type="date" placeholder="Update Attandence Date">
+                </div>
+
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <a href="#"><button type="button" class="btn btn-warning">Add</button></a>
+
+          </div>
+
+        </div>
+      </div>
+  </div>
+<!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+@endsection
+

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-  @section('admin')
+  @section('main')
   <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">

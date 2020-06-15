@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class TaskController extends Controller
 {
@@ -15,7 +16,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('admin.task.index');
+        $tasks = Task::all();
+        return view('admin.task.index', compact('tasks'));
     }
 
     /**
@@ -25,7 +27,8 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('admin.task.add_task');
+        $users = User::all();
+        return view('admin.task.create', compact('users'));
     }
 
     /**
@@ -36,8 +39,25 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-       Task::create($request->all());
-       return redirect()->back();
+        // if($request->file('attachement')){
+        //     $filePath = $request->attachement->store('task','public');
+        //     $data['attachement'] = $filePath;
+        // }
+
+        $store = Task::create($request->all());
+
+        if ($store) {
+            $alert = [
+                'alert-type' => 'success',
+                'message' => 'Task send successfully'
+            ];
+        }else{
+            $alert = [
+                'alert-type' => 'error',
+                'message' => 'Someting went wrong'
+            ];
+        }
+        return redirect('admin/task')->with($alert);
     }
 
     /**
@@ -48,7 +68,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        return 'show';
     }
 
     /**
@@ -59,7 +79,7 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        return 'edit';
     }
 
     /**
@@ -71,7 +91,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        return "update";
     }
 
     /**
@@ -80,8 +100,15 @@ class TaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->task_id;
+        $task = Task::find($id);
+        $task->delete();
+            $alert = [
+                'alert-type' => 'success',
+                'message' => 'User updated successfully'
+            ];
+        return back()->with($alert);
     }
 }

@@ -21,10 +21,10 @@ class NoticeBoardController extends Controller
     }
 
     /*-----ADD Notice Board Index Show Called This GET Route-----*/
-    public function add_notice_view()
+    public function create()
     {
 
-        return view('admin.notice.add_notice');
+        return view('admin.notice.create');
     }
 
     /*-----ADD Notice Board Store Called This POST Route-----*/
@@ -41,9 +41,7 @@ class NoticeBoardController extends Controller
 
         if ($validator->fails()) {
             Alert::error('Oops!','The Notice Boards Field Is Required Only Minimum 4 Character Allow,Duplicate Values Are Not Allow');
-            return redirect('admin-notice-add-notice')
-                        ->withErrors($validator)
-                        ->withInput();
+            return back()->withErrors($validator)->withInput();
         }
 
         else {
@@ -53,7 +51,7 @@ class NoticeBoardController extends Controller
             $notice_boards->notice_description = $request->input('notice_description');
             $notice_boards->Save();
             toast('Notice Boards Added Successfully!','success');
-            return redirect('/admin-notice-index')->with('success','Your Post as been submited!');
+            return redirect('/admin/notice')->with('success','Your Post as been submited!');
 
         }
     }
@@ -106,7 +104,7 @@ class NoticeBoardController extends Controller
             $notice_boards->notice_description = $request->input('notice_description');
             $notice_boards->Save();
             toast('Notice Boards Update Successfully!','success');
-            return redirect('/admin-notice-index')->with('success','Your Post as been submited!');
+            return redirect('admin/notice')->with('success','Your Post as been submited!');
         }
     }
 
@@ -118,6 +116,6 @@ class NoticeBoardController extends Controller
         $notice_boards=NoticeBoard::find($id);
         $notice_boards->delete();
         toast('Notice Boards Deleted Successfully', 'success');
-        return redirect('/admin-notice-index')->with('salary','Notice Boards Deleted Successfully');
+        return redirect('admin/notice')->with('salary','Notice Boards Deleted Successfully');
     }
 }

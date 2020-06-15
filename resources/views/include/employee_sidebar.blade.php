@@ -10,7 +10,7 @@
       </a>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
-        <a class="nav-link" href="employee">
+        <a class="nav-link" href="{{ url('employee') }}">
           <i class="fas fa-address-card"></i>
           <span>Dashboard</span></a>
       </li>
@@ -21,7 +21,7 @@
 
       <!--Profile Show Section-->
       <li class="nav-item">
-        <a class="nav-link" href="employee-profile">
+        <a class="nav-link" href="{{ url('employee/profile') }}">
           <i class="fab fa-fw fa-wpforms"></i>
           <span>Profile</span>
         </a>
@@ -29,7 +29,7 @@
 
        <!--Task Section-->
       <li class="nav-item">
-        <a class="nav-link" href="employee-leave">
+        <a class="nav-link" href="{{ url('employee/leave') }}">
           <i class="fas fa-clipboard-list"></i>
           <span>Leave Request</span>
         </a>
@@ -38,7 +38,7 @@
 
       <!--Task Section-->
       <li class="nav-item">
-        <a class="nav-link" href="employee-attandence">
+        <a class="nav-link" href="{{ url('employee/attandence') }}">
           <i class="fas fa-clipboard-list"></i>
           <span>View Attandence</span>
         </a>
@@ -46,7 +46,7 @@
 
       <!--Task Section-->
       <li class="nav-item">
-        <a class="nav-link" href="employee-events">
+        <a class="nav-link" href="{{ url('employee/events') }}">
           <i class="fas fa-clipboard-list"></i>
           <span>View Events</span>
         </a>
@@ -54,12 +54,12 @@
 
       <!--Task Section-->
       <li class="nav-item">
-        <a class="nav-link" href="employee-task">
+        <a class="nav-link" href="{{ url('employee/task') }}">
           <i class="fas fa-clipboard-list"></i>
           <span>Task</span>
         </a>
       </li>
-      
+
 
 
 
@@ -71,23 +71,22 @@
 
       <!--Award Section-->
       <li class="nav-item">
-        <a class="nav-link" href="employee-award-index">
+        <a class="nav-link" href="{{ url('employee/award') }}">
           <i class="fas fa-trophy"></i>
           <span>Award</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="employee-notice">
+        <a class="nav-link" href="{{ url('employee/notice') }}">
           <i class="fas fa-briefcase"></i>
           <span>Notice Board</span>
         </a>
       </li>
 
-      
-      
+
+
       <hr class="sidebar-divider">
     </ul>
     <!-- Sidebar Section-->
 
-    

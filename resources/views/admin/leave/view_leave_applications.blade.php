@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-  @section('admin')
+  @section('main')
   <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -16,39 +16,40 @@
               <div class="card mb-4">
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                    <h5>Request Leave Details</h5>
                     <thead class="thead-light">
-                      <tr>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Date</th>
-                        <th>Leave Type</th>
-                        <th>Reason</th>
-                        <th>Applied On</th>
-                        <th>Number Of Leave</th>
-                        <th>Request Status</th>
-                        <th>Action</th>
-                      </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>User Name</th>
+                            <th>Leave Types</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Duration</th>
+                            <th>Created</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
                     <tbody>
+                        @foreach($leaves as $leave)
+                            <tr>
+                                <td>1</td>
+                                <td>{{ $leave->user_id }}</td>
+                                <td>{{ $leave->types }}</td>
+                                <td>{{ $leave->start }}</td>
+                                <td>{{ $leave->end }}</td>
+                                <td>{{ $leave->duration }}</td>
+                                <td>{{ $leave->created_at }}</td>
+                                <td>{{ $leave->status }}</td>
+                                <td>@if($leave->status == 'Actived')
 
-                      <tr>
-                        <td>1</td>
-                        <td>Customer Support</td>
-                        <td>New York</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>Customer Support</td>
-                        <td>7</td>
-                        <td>
-                          <button type="button" class="btn btn-success">Accept</button>
-                          <button type="button" class="btn btn-danger">Reject</button>
-                        </td>
-                        <td><button type="button" class="btn btn-warning" data-toggle="modal" data-leave_id="1" data-target="#updateLeaveApplication"
-                    	id="#updateLeaveApplicationBoard"><i class="fas fa-user-edit">Update</i></button>
-                		<button type="button" class="btn btn-danger" data-leave_id="1" data-toggle="modal" data-target="#deleteLeaveApplication"
-                    	id="#deleteLeaveApplicationBoard"><i class="fas fa-trash">Delete</i></button>
-                    	</td>
-                      </tr>
+                                    <a href="{{ url('admin/leave/'.$leave->id.'/edit?status=reject') }}" class="btn btn-sm btn-danger">Reject</a>
+                                    @else
+                                    <a href="{{ url('admin/leave/'.$leave->id.'/edit?status=active') }}" class="btn btn-sm btn-primary">Accept</a>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                   </table>
                 </div>

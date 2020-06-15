@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-  @section('event')
+  @section('main')
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
@@ -40,12 +40,12 @@
                 <input type="color" class="form-control" name="backgroundColor" required>
             </div>
             <div class="form-group col-md-8 col-md-offset-2">
-                <button type="submit" class="btn btn-primary btn-lg">Save</button> 
+                <button type="submit" class="btn btn-primary btn-lg">Save</button>
             </div>
         </form>
   </div>
   </div>
   </div>
   </div>
-  </div> 
+  </div>
 @endsection

@@ -13,7 +13,7 @@ class AjaxController extends Controller{
     public function designation(Request $data){
         if($data){
             $department = $data->department;
-            $designation = Department::where('dept_name',$department)->first();
+            $designation = Department::where('name',$department)->first();
             if($designation){
                 return response()->json($designation);
             }

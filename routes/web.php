@@ -13,11 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function(){
-//     return view('welcome');
-// });
+Route::get('/', function(){
+    return view('welcome');
+});
 
-Route::get('/','Admin\DashboardController@index');
 
 
 /*Manager Section Route*/
@@ -47,31 +46,6 @@ Route::get('/manager-notice', function () {
     return view('manager.notice.index');
 });
 
-/*Employees Section Route*/
-Route::get('/employee', function () {
-    return view('employee.index');
-});
-Route::get('/employee-profile', function () {
-    return view('employee.profile.index');
-});
-Route::get('/employee-leave', function () {
-    return view('employee.request_leave.index');
-});
-Route::get('/employee-attandence', function () {
-    return view('employee.attandence.index');
-});
-Route::get('/employee-events', function () {
-    return view('employee.events.index');
-});
-Route::get('/employee-task', function () {
-    return view('employee.task.index');
-});
-Route::get('/employee-award-index', function () {
-    return view('employee.award.index');
-});
-Route::get('/employee-notice', function () {
-    return view('employee.notice.index');
-});
 
 /*PDF Generate Section Route*/
 Route::get('/certificate', function () {

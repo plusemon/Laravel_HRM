@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-  @section('admin')
+  @section('main')
   <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -145,4 +145,34 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
+@endsection
+
+
+@section('scripts')
+
+    <script>
+        /*-----Update Leave Types Modal Update Scripts-----*/
+        $('#updateLeave').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var leave_typ = button.data('leave_typ');
+        var num_leaves = button.data('num_leaves');
+        var leave_types_id = button.data('leave_types_id');
+        var modal = $(this);
+        modal.find('.modal-title').text('Update Leave Types');
+        modal.find('.modal-body #leave_typ').val(leave_typ);
+        modal.find('.modal-body #num_leaves').val(num_leaves);
+        modal.find('.modal-body #leave_types_id').val(leave_types_id);
+        });
+
+        /*-----Delete Leave Types Modal Delete Scripts-----*/
+        $('#deleteLeave').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('leave_types_id');
+                var modal = $(this);
+                modal.find('.modal-title').text('Delete Notice');
+                modal.find('.modal-body #leave_types_id').val(id);
+        });
+    </script>
+
+
 @endsection

@@ -31,7 +31,7 @@
      @include('include.employee_topbar')
     {{-->> INDIVISUAL --}}
       @yield('employee')
-    @include('sweetalert::alert')  
+    @include('sweetalert::alert')
 
 
     <!-----Page Dashboard & Form Level Templetes----->
@@ -48,7 +48,7 @@
     </script>
     <script src="{{asset('/sweetalert/sweetalert.all.js')}}"></script>
     <script src="{{asset('/sweetalert/toastr.min.js')}}"></script>
-    <script src="{{asset('/js/sweetalert.min.js')}}"></script>  
+    <script src="{{asset('/js/sweetalert.min.js')}}"></script>
 
 <!-- Search Box Work level plugins -->
     <!-- Page level plugins -->
@@ -58,20 +58,23 @@
     <!-----Page DataTables Custom(Search) Scripts----->
     <script>
     $(document).ready(function () {
-      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTable').DataTable(); // ID From dataTable
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
     </script>
 <!-- Search Box Work level plugins -->
 
 @yield('attandence')
-@yield('events') 
-@yield('scripts')
+@yield('events')
+
+<!-- SCRIPT SECTION -->
+  {{-->> INDIVISUAL --}}
+    @yield('scripts')
+
   {{-->> TOASTR --}}
     @include('admin.partials.toastr')
-
 </body>
 </html>
 
 
-        
+

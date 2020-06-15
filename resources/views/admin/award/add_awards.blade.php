@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-  @section('admin')
+  @section('main')
 <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -12,12 +12,12 @@
           </div>
         </div>
         <!-- Awards Page Section-->
-   
+
             <div class="col-lg-12">
               <!-- Form Basic -->
               <div class="card mb-4 align-self-xl-center">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  		<h6 class="m-0 font-weight-bold text-primary fas fa-trophy"> Give an Award</h6>	
+                  		<h6 class="m-0 font-weight-bold text-primary fas fa-trophy"> Give an Award</h6>
                 </div>
                 <div class="card-body align-items-center justify-content-between">
                   <form>
@@ -68,12 +68,12 @@
                         <option>October</option>
                         <option>November</option>
                         <option>December</option>
-                      </select> 
+                      </select>
                     </div>
 
                     <div class="form-group">
                       <label>Year</label>
-                      <input type="number" name="award_year" class="form-control col-lg-6 font-weight-bold" required> 
+                      <input type="number" name="award_year" class="form-control col-lg-6 font-weight-bold" required>
                     </div>
 
 
@@ -83,6 +83,6 @@
               </div>
           </div>
 
-         
+
 
     @endsection

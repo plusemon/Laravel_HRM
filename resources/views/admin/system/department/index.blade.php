@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-  @section('admin')
+  @section('main')
   <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -25,28 +25,24 @@
                       <tr>
                         <th>No</th>
                         <th>Department Name</th>
+                        <th>Deg 1</th>
+                        <th>Deg 2</th>
                         <th>Created On</th>
                         <th>Action</th>
                       </tr>
                     </thead>
-                    <tfoot>
-                      <tr>
-                        <th>No</th>
-                        <th>Department Name</th>
-                        <th>Created On</th>
-                        <th>Action</th>
-                      </tr>
-                    </tfoot>
                     <tbody>
 
                       @php($i=1)
                       @foreach($departments as $departments)
                       <tr>
                         <td>{{$i++}}</td>
-                        <td>{{ $departments-> dept_name }}</td>
-                        <td>{{ $departments-> created_at }}</td>
+                        <td>{{ $departments->name }}</td>
+                        <td>{{ $departments->deg1 }}</td>
+                        <td>{{ $departments->deg2 }}</td>
+                        <td>{{ $departments->created_at }}</td>
 
-                        <td><button data-dept_id="{{ $departments->id }}" data-dept_name="{{ $departments->dept_name }}" data-first_desgn="{{ $departments->first_desgn }}" data-second_desgn="{{ $departments->second_desgn }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateDepartment"
+                        <td><button data-dept_id="{{ $departments->id }}" data-name="{{ $departments->name }}" data-deg1="{{ $departments->deg1 }}" data-deg2="{{ $departments->deg2 }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateDepartment"
                       id="#updateDepartmentName"><i class="fas fa-user-edit">Update</i></button>
                     <button data-dept_id="{{ $departments->id }}" type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDepartment"
                       id="#deleteDepartmentName"><i class="fas fa-trash">Delete</i></button>
@@ -83,9 +79,9 @@
                 <form action="{{url('admin/departments')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                 <div class="modal-body">
-                   <input name="dept_name" class="form-control  mb-3" type="text" placeholder="Add Department Name">
-                   <input name="first_desgn" class="form-control  mb-3" type="text" placeholder="Add Designation 1">
-                   <input name="second_desgn" class="form-control  mb-3" type="text" placeholder="Add Designation 2">
+                   <input name="name" class="form-control  mb-3" type="text" placeholder="Add Department Name">
+                   <input name="deg1" class="form-control  mb-3" type="text" placeholder="Add Designation 1">
+                   <input name="deg2" class="form-control  mb-3" type="text" placeholder="Add Designation 2">
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -113,11 +109,11 @@
           <div class="modal-body">
               <input type="hidden" name="dept_id" id="dept_id">
               <label class="font-weight-bold">Department Name</label>
-              <input name="dept_name" id="dept_name" class="form-control  mb-3" type="text" placeholder="Update Department Name">
+              <input name="name" id="name" class="form-control  mb-3" type="text" placeholder="Update Department Name">
               <label class="font-weight-bold">Designation 1</label>
-              <input name="first_desgn" id="first_desgn" class="form-control  mb-3" type="text" placeholder="Update Designation 1">
+              <input name="deg1" id="deg1" class="form-control  mb-3" type="text" placeholder="Update Designation 1">
               <label class="font-weight-bold">Designation 2</label>
-              <input name="second_desgn" id="second_desgn" class="form-control  mb-3" type="text" placeholder="Update Designation 2">
+              <input name="deg2" id="deg2" class="form-control  mb-3" type="text" placeholder="Update Designation 2">
          </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -159,6 +155,33 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
+@endsection
+
+@section('scripts')
+    <script>
+            /*-----Department Modal Update Scripts-----*/
+    $('#updateDepartment').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var name = button.data('name')
+        var deg1 = button.data('deg1')
+        var deg2 = button.data('deg2')
+        var dept_id = button.data('dept_id')
+        var modal = $(this)
+        modal.find('.modal-title').text('Update Department Name')
+        modal.find('.modal-body #name').val(name);
+        modal.find('.modal-body #deg1').val(deg1);
+        modal.find('.modal-body #deg2').val(deg2);
+        modal.find('.modal-body #dept_id').val(dept_id);
+    });
+        /*-----Department Modal Delete Scripts-----*/
+    $('#deleteDepartment').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var dept_id = button.data('dept_id')
+        var modal = $(this)
+        modal.find('.modal-title').text('Delete Department Name')
+        modal.find('.modal-body #dept_id').val(dept_id);
+    });
+    </script>
 @endsection
 
 

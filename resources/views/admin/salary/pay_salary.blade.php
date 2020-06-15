@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('admin')
+@section('main')
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -20,7 +20,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Payment Salary</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('salary-pay') }}" method="POST">
+                    <form action="{{ url('admin/payment') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label>User ID</label>
@@ -31,8 +31,6 @@
                                 @endforeach
                             </select>
                         </div>
-
-
                         <div class="form-group">
                             <label>Month</label>
                             <select class="form-control" name="month">
@@ -51,6 +49,16 @@
                         		<option value="december">December</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" name="status">
+                                <option value="paid">Paid</option>
+                                <option value="pending">Pending</option>
+                                <option value="reject">Reject</option>
+                            </select>
+                        </div>
+
+
 
                         <div class="form-group">
                         	<button type="submit" class="btn btn-success">Payment</button>
@@ -76,23 +84,32 @@
                         <th>User ID</th>
                         <th>User Name</th>
                         <th>Department</th>
-                        <th>Payment Salary</th>
                         <th>Month</th>
+                        <th>Salery</th>
+                        <th>Status</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-
-                      <tr>
-                        <td>1</td>
-                        <td>Customer Support</td>
-                        <td>Customer Support</td>
-                        <td>New York</td>
-                        <td>New York</td>
-                        <td><button type="button" class="btn btn-warning" data-toggle="modal">Update Payment</button>
-                    	<button type="button" class="btn btn-danger" data-toggle="modal">Delete Payment</button>
-                    	</td>
-                      </tr>
+                        @forelse($payments as $payment)
+                        <tr>
+                            <td>{{ $payment->user->id }}</td>
+                            <td>{{ $payment->user->name }}</td>
+                            <td>{{ $payment->user->department }}</td>
+                            <td>{{ $payment->month }}</td>
+                            <td>{{ $payment->salary }}</td>
+                            <td>{{ $payment->status }}</td>
+                            <td><button type="button" class="btn btn-warning" data-toggle="modal">Update</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal">Delete</button>
+                            </td>
+                          </tr>
+                        @empty
+                          <tr>
+                              <td colspan="6" class="text-center">
+                                <h3>No payment found..</h3>
+                              </td>
+                          </tr>
+                        @endforelse
                     </tbody>
                   </table>
                 </div>

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-  @section('admin')
-<style type="text/css">	
+  @section('main')
+<style type="text/css">
 
 h1 {
 
@@ -27,23 +27,23 @@ h3 {
  	font-family: 'Nosifer';font-size: 15px;
  }
 .first-div {
-  width:900px; 
-  height:600px; 
-  padding:20px; 
-  text-align:center; 
-  border: 10px double #000000; 
-  position: absolute; 
-  margin: 80px 0 20px -175px; 
-  left: 25%; 
+  width:900px;
+  height:600px;
+  padding:20px;
+  text-align:center;
+  border: 10px double #000000;
+  position: absolute;
+  margin: 80px 0 20px -175px;
+  left: 25%;
   top: 25%;"
   /*background: linear-gradient(to right,#BCC6CC,#DF01D7);*/
 }
 
 .second-div {
-  width:850px; 
-  height:550px; 
-  padding:20px; 
-  text-align:center; 
+  width:850px;
+  height:550px;
+  padding:20px;
+  text-align:center;
   border: 10px double #000000 color bold blue;
   background: #BCC6CC; /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #BCC6CC, #BBD2C5, #BCC6CC); /* Chrome 10-25, Safari 5.1-6 */
@@ -163,7 +163,7 @@ h3 {
 
        <br><br>
 
-      <img 
+      <img
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -273,13 +273,13 @@ The Best Customer Centricity title identifies those employees who offer the best
       	<hr>
       	<h3>Certified by</h3>
       </div>
-      
+
       <div class="date">
       	<h3>14.03.2020</h3>
       	<hr>
       	<h3>Date</h3>
       </div>
-      
+
 </div>
 
 </div>

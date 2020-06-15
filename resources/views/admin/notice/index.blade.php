@@ -1,12 +1,12 @@
 @extends('layouts.admin')
-  @section('admin')
+  @section('main')
   <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Notice Board Tables</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="admin">Dashboard</a></li>
-              
+
               <li class="breadcrumb-item active" aria-current="page">Notice Board</li>
             </ol>
           </div>
@@ -16,12 +16,12 @@
             <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <a href="admin-notice-add-notice"><button type="button" class="btn btn-success" data-toggle="modal">Add Notice</button></a>
+                  <a href="{{ url('admin/notice/create') }}"><button type="button" class="btn btn-success" data-toggle="modal">Add Notice</button></a>
                 </div>
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
-                      <tr>
+                      <tr
                         <th>No</th>
                         <th>Title</th>
                         <th>Description</th>
@@ -103,8 +103,9 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                  <form action="admin-notice-delete" method="POST" enctype="multipart/form-data">
+                  <form action="admin/notice" method="POST" enctype="multipart/form-data">
                   @csrf()
+                  @method('DELETE')
                     <div class="modal-body">
                       <input type="hidden" name="notice_id" id="notice_id">
                       Are You Sure,You Want To Delete This Notice?
@@ -118,5 +119,32 @@
             </div>
           </div>
         </div>
+@endsection
+
+@section('scripts')
+    <script>
+        /*-----Update Notice Board Modal Update Scripts-----*/
+        $('#updateNotice').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var notice_title = button.data('notice_title')
+            var notice_description = button.data('notice_description')
+            var notice_id = button.data('notice_id')
+            var modal = $(this)
+            modal.find('.modal-title').text('Update Notice')
+            modal.find('.modal-body #notice_title').val(notice_title);
+            modal.find('.modal-body #notice_description').val(notice_description);
+            modal.find('.modal-body #notice_id').val(notice_id);
+        });
+
+
+        /*-----Delete Notice Board Modal Delete Scripts-----*/
+        $('#deleteNotice').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var notice_id = button.data('notice_id')
+            var modal = $(this)
+            modal.find('.modal-title').text('Delete Notice')
+            modal.find('.modal-body #notice_id').val(notice_id);
+        });
+    </script>
 @endsection
 

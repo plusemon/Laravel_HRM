@@ -21,7 +21,11 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+
     public const HOME = '/home';
+    public const ADMIN = '/admin';
+    public const MANAGER = '/manager';
+    public const EMPLOYEE = '/employee';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -46,7 +50,9 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        $this->mapadminRoutes();
+        $this->mapAdminRoutes();
+
+        $this->mapEmployeeRoutes();
 
         //
     }
@@ -87,11 +93,26 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapadminRoutes()
+    protected function mapAdminRoutes()
     {
         Route::prefix('admin')
         ->middleware('web')
         ->namespace($this->namespace.'\Admin')
         ->group(base_path('routes/admin.php'));
+    }
+
+    /**
+     * Define the "employee" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapEmployeeRoutes()
+    {
+        Route::prefix('employee')
+        ->middleware('web')
+        ->namespace($this->namespace.'\employee')
+        ->group(base_path('routes/employee.php'));
     }
 }

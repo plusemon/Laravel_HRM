@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateTasksTable extends Migration
 {
     /**
@@ -15,6 +16,12 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->string('duration');
+            $table->string('subject')->default('Pending');
+            $table->text('description');
+            $table->string('attachment')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

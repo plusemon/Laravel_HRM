@@ -1,19 +1,5 @@
 @extends('layouts.admin')
-@section('admin')
-
-        <div class="container-fluid" id="container-wrapper">
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addEvent"
-                    id="#addEventCalendar">Add Event</button>
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="admin">Dashboard</a></li>
-              <li class="breadcrumb-item">Event</li>
-            </ol>
-          </div>
-
-@endsection
-
-@section('event')
+@section('main')
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
         <meta name="csrf-token" content="{{ csrf_token() }}">

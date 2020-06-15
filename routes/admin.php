@@ -17,42 +17,40 @@ Route::get('/','DashboardController@index');
 Route::get('profile','AdminProfile@index')->name('admin.profile');
 
 
-// =---------- AJAX REQUEST HANDLE ROUTES -----------------//
+//////////// AJAX REQUEST HANDLE ROUTES ////////////////////
 Route::get('get-designation', 'AjaxController@designation');
 Route::get('/check-email', 'AjaxController@checkEmail');
 Route::get('/check-id', 'AjaxController@checkId');
+//----------------------------------------------------------//
 
-
-
-// ---------------- User CRUD Routes -----------------//
+/////////////////// ALL RESOURECE ROUTES /////////////////////
 Route::resource('users','UserController');
-
-/*-----Salary Controller Route-----*/
-Route::resource('salaries','SalaryController');
-
-Route::resource('pay_salary', 'PaySaleryController');
-
-/*-----Department Controller Route-----*/
+// SYSTEM
 Route::resource('departments','DepartmentController');
-
-/*-----Country Controller Route-----*/
 Route::resource('countries','CountryController');
 
-/*-----Event Controller Route-----*/
+// ATTENDANCE
+Route::resource('attendance', 'AttendanceController');
+
+// SALARIY
+Route::resource('salaries','SalaryController');
+Route::resource('payment', 'PaymentController');
+
+// EVENTS
 Route::resource('events', 'EventController');
 
-/*-----Award Categories Controller Route-----*/
-Route::resource('award_categories','AwardCategoryController');
-
-/*-----Notice-----*/
-Route::resource('notice','NoticeBoardController');
-
-// TASK ROUTES
+// TASK
 Route::resource('task','TaskController');
 
-/*-----Leave Types Controller Route-----*/
+// LEAVE APLICATION
 Route::resource('leave_types','LeaveTypeController');
+Route::resource('leave','LeaveController');
 
-Route::resource('attandence', 'AttandenceController');
+// AWARD
+Route::resource('award_categories','AwardCategoryController');
+
+// NOTICE
+Route::resource('notice','NoticeBoardController');
+//-------------------------------------------------------------//
 
 

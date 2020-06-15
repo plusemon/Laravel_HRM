@@ -22,7 +22,7 @@ class EventController extends Controller
 
     public function create($date)
     {
-      //  return view('admin.events.create', compact('date'));
+       return view('admin.events.create', compact('date'));
     }
 
     public function add(Request $request)

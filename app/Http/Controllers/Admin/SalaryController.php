@@ -18,7 +18,7 @@ class SalaryController extends Controller
     public function index()
     {
         $salaries = Salary::all();
-        return view('admin.salary.add_salary', compact('salaries'));
+        return view('admin.salary.index', compact('salaries'));
     }
 
 
@@ -39,7 +39,7 @@ class SalaryController extends Controller
         //
 
         $validator=Validator::make($request->all(), [
-            'salary_amount' => 'required|unique:salaries|integer|min:4',
+            'amount' => 'required|unique:salaries|integer|min:4',
         ]);
 
         if ($validator->fails()) {
@@ -51,7 +51,7 @@ class SalaryController extends Controller
 
         else {
 
-            $salary=Salary::create($request->only('salary_amount'));
+            $salary=Salary::create($request->all());
              toast('Salary Added Successfully!','success');
             //Alert::success('Saved', 'Salary Added Successfully')->toToast();
             //Alert::success('Post Created', 'Successfully');
@@ -90,7 +90,7 @@ class SalaryController extends Controller
     {
         //
         $validator=Validator::make($request->all(),[
-            'salary_amount' => 'required|unique:salaries|integer|min:4',
+            'amount' => 'required|unique:salaries|integer|min:4',
 
         ]);
 
@@ -105,7 +105,7 @@ class SalaryController extends Controller
 
             $id=$request->get('salary_id');
             $salaries=Salary::find($id);
-            $salaries->salary_amount=$request->input('salary_amount');
+            $salaries->amount=$request->input('amount');
             $salaries->save();
             toast('Salary Update Successfully!', 'success');
             return redirect('admin/salaries')->with('Success', 'Salary Update Successfully');

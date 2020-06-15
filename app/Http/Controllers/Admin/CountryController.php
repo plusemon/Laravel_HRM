@@ -26,7 +26,7 @@ class CountryController extends Controller
     {
         //
         $validator=Validator::make($request->all(), [
-            'country_name' => 'required|unique:countries|regex:/^[a-zA-Z\s]*$/|min:3',
+            'name' => 'required|unique:countries|regex:/^[a-zA-Z\s]*$/|min:3',
         ]);
 
         if ($validator->fails()) {
@@ -38,7 +38,7 @@ class CountryController extends Controller
 
         else {
 
-            $countries=Country::create($request->only('country_name'));
+            $countries = Country::create($request->all());
              toast('Country Added Successfully!','success');
             //Alert::success('Saved', 'Salary Added Successfully')->toToast();
             //Alert::success('Post Created', 'Successfully');
@@ -53,7 +53,7 @@ class CountryController extends Controller
     {
         //
         $validator=Validator::make($request->all(),[
-            'country_name' => 'required|unique:countries|regex:/^[a-zA-Z\s]*$/|min:3',
+            'name' => 'required|unique:countries|regex:/^[a-zA-Z\s]*$/|min:3',
 
         ]);
 
@@ -66,9 +66,9 @@ class CountryController extends Controller
 
         else {
 
-            $id=$request->get('country_id');
+            $id = $request->get('country_id');
             $countries=Country::find($id);
-            $countries->country_name=$request->input('country_name');
+            $countries->name=$request->input('name');
             $countries->save();
             toast('Country Update Successfully!', 'success');
             return redirect('admin/countries')->with('Success', 'Country Update Successfully');

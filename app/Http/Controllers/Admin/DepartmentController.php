@@ -25,27 +25,24 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         //
-        $validator=Validator::make($request->all(), [
-            'dept_name' => 'required|unique:departments|regex:/^[a-zA-Z\s]*$/|min:2',
-            'first_desgn' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
-            'second_desgn' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
-
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:departments|regex:/^[a-zA-Z\s]*$/|min:2',
+            'deg1' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
+            'deg2' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
 
         ]);
 
         if ($validator->fails()) {
             Alert::error('Oops!','The Department Field Is Required Only Minimum 2 Character Allow,Duplicate Values Are Not Allow');
-            return redirect('/departments')
-                        ->withErrors($validator)
-                        ->withInput();
+            return back()->withErrors($validator)->withInput();
         }
 
         else {
 
-            $departments=new Department();
-            $departments->dept_name = $request->input('dept_name');
-            $departments->first_desgn = $request->input('first_desgn');
-            $departments->second_desgn = $request->input('second_desgn');
+            $departments= new Department();
+            $departments->name = $request->input('name');
+            $departments->deg1 = $request->input('deg1');
+            $departments->deg2 = $request->input('deg2');
             $departments->Save();
             toast('Department Added Successfully!','success');
             return redirect('admin/departments')->with('success','Your Post as been submited!');
@@ -59,9 +56,9 @@ class DepartmentController extends Controller
     {
         //
         $validator=Validator::make($request->all(), [
-            'dept_name' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
-            'first_desgn' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
-            'second_desgn' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
+            'name' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
+            'deg1' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
+            'deg2' => 'required|regex:/^[a-zA-Z\s]*$/|min:2',
 
 
         ]);
@@ -77,9 +74,9 @@ class DepartmentController extends Controller
 
             $id=$request->get('dept_id');
             $departments=Department::find($id);
-            $departments->dept_name = $request->input('dept_name');
-            $departments->first_desgn = $request->input('first_desgn');
-            $departments->second_desgn = $request->input('second_desgn');
+            $departments->name = $request->input('name');
+            $departments->deg1 = $request->input('deg1');
+            $departments->deg2 = $request->input('deg2');
             $departments->Save();
             toast('Department Update Successfully!','success');
             return redirect('admin/departments')->with('success','Your Post as been submited!');

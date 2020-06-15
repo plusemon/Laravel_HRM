@@ -50,10 +50,9 @@ class UserController extends Controller
         $data = $request->all();
 
         if($request->file('avater')){
-            $image = $request->avater->store('/avater');
+            $image = $request->avater->store('avater','public');
             $data['avater'] = $image;
         }
-
 
         $saved = User::create($data);
 
@@ -67,9 +66,8 @@ class UserController extends Controller
                 'alert-type' => 'error',
                 'message' => 'Someting went wrong'
             ];
-            return redirect()->back()->with($alert);
         }
-        return redirect('/admin-user-view')->with($alert);
+        return redirect('admin/users')->with($alert);
     }
 
     /**
@@ -78,10 +76,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        return view('admin.user.view_user_profile', compact('id'));
-        //
+
+        return view('admin.profile.profile', compact('user'));
     }
 
     /**
@@ -92,8 +90,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.user.edit_user', compact('id'));
+        $departments = Department::all();
+        $salaries = Salary::all();
+        $countries = Country::all();
 
+        $user = User::findOrFail($id);
+        return view('admin.user.edit_user', compact('departments','salaries','countries','user'));
     }
 
     /**
@@ -103,9 +105,30 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $data = $request->all();
+
+        if($request->file('avater')){
+            $image = $request->avater->store('avater','public');
+            $data['avater'] = $image;
+        }
+
+        $update = $user->update($data);
+
+        if ($update) {
+            $alert = [
+                'alert-type' => 'success',
+                'message' => 'User updated successfully'
+            ];
+        }else{
+            $alert = [
+                'alert-type' => 'error',
+                'message' => 'Someting went wrong'
+            ];
+        }
+        return redirect('admin/users')->with($alert);
+
     }
 
     /**

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('admin')
+@section('main')
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -27,7 +27,7 @@
                                 <img id="image_preview_container" src="{{ asset('img/avatar.svg') }}" class="rounded-circle" />
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
-                                    <input type="file" name="user_avater" id="image">
+                                    <input type="file" name="avater" id="image">
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
 
                         <div class="form-group">
                             <label>Fathers Name</label>
-                            <input type="text" name="fathers_name" class="form-control">
+                            <input type="text" name="father" class="form-control">
                         </div>
 
                         <div class="form-group">
@@ -59,7 +59,7 @@
 
                         <div class="form-group">
                             <label>Blood Group</label>
-                            <select class="form-control" name="blood_group">
+                            <select class="form-control" name="blood">
                                 <option value="">Select</option>
                                 <option>A+</option>
                                 <option>A-</option>
@@ -74,7 +74,7 @@
 
                         <div class="form-group">
                             <label>Mobile Number</label>
-                            <input type="number" name="mobile_number" class="form-control">
+                            <input type="number" name="mobile" class="form-control">
                         </div>
 
                         <div class="form-group">
@@ -101,7 +101,7 @@
 
                     <div class="form-group">
                         <label for="">Type</label>
-                        <select name="user_type" class="form-control">
+                        <select name="type" class="form-control">
                             <option value="">Select</option>
                             <option value="admin">Admin</option>
                             <option value="manager">Manager</option>
@@ -125,7 +125,7 @@
                         <select name="department" class="form-control" id="department" onchange="getDesignation();">
                             <option value="">Select Department</option>
                             @foreach($departments as $department)
-                                <option value="{{ $department->dept_name }}">{{ $department->dept_name }}</option>
+                                <option value="{{ $department->name }}">{{ $department->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -141,7 +141,7 @@
                         <select name="salary" class="form-control">
                             <option value="">Select Salary</option>
                             @foreach($salaries as $salary)
-                                <option value="{{ $salary->salary_amount }}">{{ $salary->salary_amount }}</option>
+                                <option value="{{ $salary->amount }}">{{ $salary->amount }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -151,7 +151,7 @@
                         <select name="country" class="form-control">
                             <option value="">Select Country</option>
                             @foreach($countries as $country)
-                                <option value="{{ $country->country_name }}">{{ $country->country_name }}</option>
+                                <option value="{{ $country->name }}">{{ $country->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -160,7 +160,7 @@
                     <div class="form-group">
                         <label>Date of Joining</label>
                         <div class="fas fa-calendar"></div>
-                        <input type="date" name="join_date" class="form-control">
+                        <input type="date" name="join" class="form-control">
                     </div>
 
                 </div>
@@ -220,11 +220,11 @@
             // on the right side
             // avater: "required",
             name: "required",
-            fathers_name: "required",
+            father: "required",
             date_of_birth: "required",
             gender: "required",
             blood_group: "required",
-            mobile_number: {
+            mobile: {
                 required: true,
                 minlength: 11
                 },
@@ -232,7 +232,7 @@
             id: {
                 number: true
                 },
-            user_type: "required",
+            type: "required",
             email: {
                 required: true,
                 email: true
@@ -251,7 +251,7 @@
             salary: "required",
             country: "required",
             designation: "required",
-            join_date: "required",
+            join: "required",
 
 
             },
@@ -284,8 +284,8 @@
             dataType: 'json',
             success: function (data,status) {
                 if(status = 200){
-                    $("#designation").html('<option value="' + data.first_desgn + '">' + data.first_desgn +
-                        '</option><option value="' + data.second_desgn + '">' + data.second_desgn +
+                    $("#designation").html('<option value="' + data.deg1 + '">' + data.deg1 +
+                        '</option><option value="' + data.deg2 + '">' + data.deg2 +
                         '</option>');
                 }
             }
