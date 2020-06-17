@@ -25,7 +25,7 @@
 
                     <div class="form-group col-6 m-auto">
                         <h3>Pick an Attendance date</h3>
-                        <input type="date" name="att_date" class="form-control" required>
+                        <input type="date" name="att_date" id="att_date" class="form-control" required>
                     </div>
             </div>
               <div class="card mb-4">
@@ -105,3 +105,15 @@
   </a>
 @endsection
 
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+
+    $("#att_date").flatpickr({
+        maxDate: "today"
+    });
+</script>
+
+@endsection

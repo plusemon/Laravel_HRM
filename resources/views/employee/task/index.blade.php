@@ -10,77 +10,114 @@
         </ol>
     </div>
 </div>
-
-        <div class="row">
-            <!--Attandence DataTable with Hover Section-->
-            <div class="col-lg-12">
-              <div class="card mb-4">
-                <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                    <h5>Request Leave Details</h5>
+<div class="row">
+    <!--Task DataTable with Hover Section-->
+    <div class="col-lg-12">
+        <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <a href="{{ url('admin/task/create') }}"><button type="button"
+                        class="btn btn-success" data-toggle="modal">Add Task</button></a>
+            </div>
+            <div class="table-responsive p-3">
+                <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
-                      <tr>
-                        <th>No</th>
-                        <th>User Name</th>
-                        <th>Start Leave Date</th>
-                        <th>Leave Types</th>
-                        <th>Number Of Leave</th>
-                        <th>Created On</th>
-                        <th>Leave Status</th>
-                      </tr>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Description</th>
+                            <th>Duration</th>
+                            <th>Attachment</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
                     <tbody>
-
-                      <tr>
-                        <td>1</td>
-                        <td>Customer Support</td>
-                        <td>Customer Support</td>
-                        <td>New York</td>
-                        <td>New York</td>
-                        <td>New York</td>
-                        <td>
-                          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateTask"
-                      id="#updateTaskStatus"><i class="fas fa-user-edit">Update</i></button>
-                          <button type="button" class="btn btn-success" data-toggle="modal"><i class="fas fa-user">View</i></button>       
-                      </td>
-                      </tr>
+                        @foreach($tasks as $task)
+                            <tr>
+                                <td>{{ $task->subject }}</td>
+                                <td>{{ $task->description }}</td>
+                                <td>{{ $task->duration }}</td>
+                                <td><a href="{{ url('employee/storage/task/'.$task->id)}}">View/Download</a></td>
+                                <td>{{ $task->status }}</td>
+                                <td>
+                                    @if($task->status == 'Requested')
+                                        <button type="button" class="btn btn-warning" data-toggle="modal"
+                                            data-target="#submitTask" data-id="{{ $task->id }}" id="#submitTaskBoard">Submit Now</button>
+                                    @else
+                                        <button type="button" class="btn btn-warning" data-toggle="modal"
+                                            data-target="#updateTask" id="#updateTaskBoard">Re-Submit</button>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
-                  </table>
-                </div>
-              </div>
+                </table>
             </div>
-          </div>
         </div>
-<!--Update Leave Type Modal Center -->
- <div class="modal fade" id="updateTask" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="updateTaskStatus">Update Task</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    </div>
+</div>
+
+<!--Submit Task Modal Center -->
+<div class="modal fade" id="submitTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="submitTaskBoard">Submit Task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                  </button>
+                </button>
+            </div>
+            <form action="{{ url('employee/task') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="taskID">
+                    <div class="form-group">
+                        <label for="attachment">Choose file</label>
+                        <input type="file" name="user_file" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="attachment">Comment</label>
+                        <input type="text" name="comment" id="comment" class="form-control" placeholder="Optional">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Update Leave Type Modal Center -->
+<div class="modal fade" id="submitTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="submitTaskStatus">Update Task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="#" method="POST" enctype="multipart/form-data">
-          
-              <div class="modal-body">
+
+                <div class="modal-body">
                     <div class="form-group">
-                          <label>Task Status</label>
-                            <select class="form-control" name="blood_group">
-                                <option value="">Select</option>
-                                <option>Pending</option>
-                                <option>Completed</option>
-                            </select>
+                        <label for="attachment">Choose file</label>
+                        <input type="file" name="attachment" class="form-control">
                     </div>
-              </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-warning">Update</button>
-            </div>
-          </form>
-  </div>
-  </div>
+                    <div class="form-group">
+                        <input type="text" name="comment" id="comment" class="form-control" placeholder="Comment">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <!-- Scroll to top -->
@@ -88,5 +125,28 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
+
+@endsection
+
+
+@section('scripts')
+
+    <script>
+        $('#submitTask').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var task_id = button.data('id');
+            var modal = $(this);
+            modal.find('.modal-body #taskID').val(task_id);
+        });
+
+        $('#editTask').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var task_id = button.data('id');
+            var modal = $(this);
+            modal.find('.modal-title').text('Delete Task Name');
+            modal.find('.modal-body #task_id').val(task_id);
+        });
+
+    </script>
 
 @endsection

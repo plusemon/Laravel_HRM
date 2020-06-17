@@ -18,10 +18,12 @@ class CreateTasksTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('duration');
-            $table->string('subject')->default('Pending');
+            $table->string('subject');
             $table->text('description');
             $table->string('attachment')->nullable();
-            $table->string('status');
+            $table->string('user_file')->nullable();
+            $table->string('comment')->nullable();
+            $table->string('status')->default('Requested');
             $table->timestamps();
         });
     }

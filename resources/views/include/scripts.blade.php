@@ -2,10 +2,10 @@
 <script src="{{asset('/dashboard/vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('/dashboard/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-<script src="{{asset('/dashboard/js/ruang-admin.min.js')}}"></script>
-<script src="{{asset('/dashboard/vendor/chart.js/Chart.min.js')}}"></script>
-<script src="{{asset('/dashboard/js/demo/chart-area-demo.js')}}"></script>
-<script src="{{asset('/dashboard/vendor/jquery.min.js')}}"></script>
+{{--  <script src="{{asset('/dashboard/js/ruang-admin.min.js')}}"></script>  --}}
+{{--  <script src="{{asset('/dashboard/vendor/chart.js/Chart.min.js')}}"></script>  --}}
+{{--  <script src="{{asset('/dashboard/js/demo/chart-area-demo.js')}}"></script>  --}}
+{{--  <script src="{{asset('/dashboard/vendor/jquery.min.js')}}"></script>  --}}
 
 <!-----Sweet Alert Javascripts----->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></script>

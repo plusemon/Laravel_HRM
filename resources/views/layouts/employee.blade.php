@@ -64,8 +64,7 @@
     </script>
 <!-- Search Box Work level plugins -->
 
-@yield('attandence')
-@yield('events')
+@yield('main')
 
 <!-- SCRIPT SECTION -->
   {{-->> INDIVISUAL --}}

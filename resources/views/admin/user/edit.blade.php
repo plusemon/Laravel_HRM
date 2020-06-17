@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <label>Date of Birth</label>
                             <div class="fas fa-calendar"></div>
-                            <input type="Date" name="date_of_birth" value="{{ $user->date_of_birth }}" class="form-control">
+                            <input type="Date" name="date_of_birth" value="{{ $user->date_of_birth }}" class="form-control flatp">
                         </div>
 
 
@@ -161,7 +161,7 @@
                     <div class="form-group">
                         <label>Date of Joining</label>
                         <div class="fas fa-calendar"></div>
-                        <input type="date" name="join" value="{{ $user->join }}" class="form-control">
+                        <input type="date" name="join" value="{{ $user->join }}" class="form-control flatp">
                     </div>
 
                 </div>
@@ -187,148 +187,160 @@
 
 {{-- INDIVISUAL SCRIPTS SECTION - EMON KHAN --}}
 @section('scripts')
-<script src="{{asset('/vendor/validation/jquery.validate.min.js')}}"></script>
-<link rel="stylesheet" href="{{ asset('/vendor/validation/validate.css') }}">
-<script>
-    $(document).ready(function () {
-        refresh();
-
-    //Live upload profile photo
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $('#image').change(function () {
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                $('#image_preview_container').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(this.files[0]);
-        });
-
-        function refresh() {
-            getDesignation();
-        };
-
-        // form validation ruls
-        $("#user-add-form").validate({
-            // Specify validation rules
-            rules: {
-            // The key name on the left side is the name attribute
-            // of an input field. Validation rules are defined
-            // on the right side
-            // avater: "required",
-            name: "required",
-            father: "required",
-            date_of_birth: "required",
-            gender: "required",
-            blood_group: "required",
-            mobile: {
-                required: true,
-                minlength: 11
-                },
-            address: "required",
-            id: {
-                number: true
-                },
-            type: "required",
-            email: {
-                required: true,
-                email: true
-            },
-            password: {
-                required: true,
-                minlength: 6
-            },
-            nid: {
-                required: true,
-                minlength: 10,
-                number: true
-            },
-            department: "required",
-            designation: "required",
-            salary: "required",
-            country: "required",
-            designation: "required",
-            join: "required",
+    <script src="{{asset('/vendor/validation/jquery.validate.min.js')}}"></script>
+    <script src="{{ asset('/vendor/validation/custom.rules.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('/vendor/validation/validate.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
-            },
-            // Specify validation error messages
-            messages: {
-            name: "User Name is required",
-            password: {
-                required: "Please provide a password",
-                minlength: "Your password must be at least 6 characters long"
-            },
-            email: "Please enter a valid email address"
-            },
-            // Make sure the form is submitted to the destination defined
-            // in the "action" attribute of the form when valid
-            submitHandler: function(form) {
-            form.submit()
-            // alert('Submitted')
-            }
-        });
 
-    });
+    <script>
+        $(document).ready(function () {
+            refresh();
 
-     //  set designation by department
-     function getDesignation() {
-        var department = $('#department').val();
-        var url = '{{ url('admin/get-designation') }}?department=' + department;
-        $.ajax({
-            type: "GET",
-            url: url,
-            dataType: 'json',
-            success: function (data,status) {
-                if(status = 200){
-                    $("#designation").html('<option>' + data.deg1 +'</option><option>' + data.deg2 +'</option>');
+        //Live upload profile photo
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            }
-        });
-    }
+            });
 
-     //  CHECK EMAIL
-     function checkEmail() {
-        var email = $('#email').val();
-        var url = '{{ url('admin/check-email') }}?email='+email;
-        $.ajax({
-            type: "GET",
-            url: url,
-            dataType: 'json',
-            success: function (data,status) {
-                if(data == email){
-                    $("#email-exist").html('Email already exist!');
-                }else{
+            $('#image').change(function () {
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    $('#image_preview_container').attr('src', e.target.result);
                 }
-            }
+                reader.readAsDataURL(this.files[0]);
+            });
+
+            function refresh() {
+                getDesignation();
+            };
+
+            // form validation ruls
+            $("#user-add-form").validate({
+                // Specify validation rules
+                rules: {
+                // The key name on the left side is the name attribute of an input field
+                // Validation rules are defined on the right side.
+                name: "required",
+                father: "required",
+                date_of_birth: {
+                    validDOB: true
+                },
+                gender: "required",
+                blood_group: "required",
+                mobile: {
+                    required: true,
+                    minlength: 11
+                    },
+                address: "required",
+                id: {
+                    number: true
+                    },
+                type: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+                nid: {
+                    required: true,
+                    minlength: 10,
+                    number: true
+                },
+                department: "required",
+                designation: "required",
+                salary: "required",
+                country: "required",
+                designation: "required",
+                join: "required",
+
+
+                },
+                // Specify validation error messages
+                messages: {
+                name: "User Name is required",
+                password: {
+                    required: "Please provide a password",
+                    minlength: "Your password must be at least 6 characters long"
+                },
+                email: "Please enter a valid email address"
+                },
+                // Make sure the form is submitted to the destination defined
+                // in the "action" attribute of the form when valid
+                submitHandler: function(form) {
+                form.submit()
+                // alert('Submitted')
+                }
+            });
+
         });
-        $("#email-exist").html('');
-    }
 
-     //  CHECK id
-     function checkId() {
-        var id = $('#id').val();
-        var url = '{{ url('admin/check-id') }}?id='+id;
-        $.ajax({
-            type: "GET",
-            url: url,
-            dataType: 'json',
-            success: function (data,status) {
-                    $("#available").html('');
-                    $("#user-exist").html('User id already exist!');
-            },
-            error: function(){
-                $("#user-exist").html('');
-        $("#available").html('Available');
-            }
+        //  set designation by department
+        function getDesignation() {
+            var department = $('#department').val();
+            var url = '{{ url('admin/get-designation') }}?department=' + department;
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: 'json',
+                success: function (data,status) {
+                    if(status = 200){
+                        $("#designation").html('<option value="' + data.deg1 + '">' + data.deg1 +
+                            '</option><option value="' + data.deg2 + '">' + data.deg2 +
+                            '</option>');
+                    }
+                }
+            });
+        }
+
+        //  CHECK EMAIL
+        function checkEmail() {
+            var email = $('#email').val();
+            var url = '{{ url('admin/check-email') }}?email='+email;
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: 'json',
+                success: function (data,status) {
+                    if(data == email){
+                        $("#email-exist").html('Email already exist!');
+                    }else{
+                    }
+                }
+            });
+            $("#email-exist").html('');
+        }
+
+        //  CHECK id
+        function checkId() {
+            var id = $('#id').val();
+            var url = '{{ url('admin/check-id') }}?id='+id;
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: 'json',
+                success: function (data,status) {
+                        $("#available").html('');
+                        $("#user-exist").html('User id already exist!');
+                },
+                error: function(){
+                    $("#user-exist").html('');
+            $("#available").html('Available');
+                }
+            });
+        }
+
+
+
+        $(".flatp").flatpickr({
+            maxDate: "today"
         });
-    }
 
-
-</script>
+    </script>
 
 @endsection

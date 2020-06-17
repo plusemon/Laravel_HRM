@@ -18,12 +18,16 @@ Route::get('attandence', function () {
 Route::get('events', function () {
     return view('employee.events.index');
 });
-Route::get('task', function () {
-    return view('employee.task.index');
-});
+
+Route::resource('task', 'TaskController');
+
+
+Route::get('/storage/task/{file}', 'TaskController@show');
+
 Route::get('index', function () {
     return view('employee.award.index');
 });
+
 Route::get('notice', function () {
     return view('employee.notice.index');
 });

@@ -15,10 +15,7 @@
 <div class="col-lg-12">
     <!-- Form Basic -->
     <div class="card mb-4">
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary fas fa-trophy"> Add Task</h6>
-        </div>
-        <div class="card-body">
+        <div class="card-body col-6 m-auto">
             <form action="{{ url('admin/task') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
@@ -26,7 +23,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">User</span>
                         </div>
-                        <select class="form-control col-lg-6" name="user_id" required>
+                        <select class="form-control" name="user_id" required>
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}">({{ $user->id }}) {{ $user->name }} </option>
                             @endforeach
@@ -39,7 +36,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Subject</span>
                         </div>
-                        <input name="subject" type="text" class="form-control col-lg-6 font-weight-bold" required>
+                        <input name="subject" type="text" class="form-control" required>
                     </div>
                 </div>
 
@@ -48,7 +45,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Duration</span>
                         </div>
-                        <select class="form-control col-lg-6 font-weight-bold" name="duration">
+                        <select class="form-control" name="duration">
                             <option>1 Week</option>
                             <option>1 Month</option>
                             <option>3 Month</option>
@@ -63,10 +60,15 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Description</span>
                         </div>
-                        <textarea name="description" rows="8" textarea class="form-control col-lg-6" required></textarea>
+                        <textarea name="description" rows="8" textarea class="form-control" required></textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success col-2 mb-3 ml-3">Submit</button>
+                <div class="form-group">
+                    <input type="file" name="attachment" class="form-control">
+                </div>
+                <div class="form-group text-right">
+                <button type="submit" class="btn btn-success w-100 ">Submit</button>
+                </div>
             </form>
         </div>
     </div>

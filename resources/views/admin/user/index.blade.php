@@ -48,7 +48,7 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->department }}</td>
                             <td>{{ $user->country }}</td>
-                            <td>{{ $user->blood_group }}</td>
+                            <td>{{ $user->blood }}</td>
                             <td>
                                 <a href="{{ url('admin/users/') }}/{{ $user->id }}/edit">
                                     <button type="button" class="btn btn-warning"><i class="fas fa-user-edit">Edit</i></button></a>

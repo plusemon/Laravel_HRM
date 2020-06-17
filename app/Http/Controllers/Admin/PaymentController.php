@@ -99,9 +99,13 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $payment = Payment::findOrFail($request->payment_id);
+        $payment->status = $request->status;
+        $payment->save();
+        toast('Payment Updated Successfully', 'success');
+        return back();
     }
 
     /**
@@ -110,8 +114,10 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+       $payment = Payment::find($request->payment_id)->first()->delete();
+       toast('Payment Deleted Successfully', 'success');
+       return back();
     }
 }

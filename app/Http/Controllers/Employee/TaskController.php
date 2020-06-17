@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\employee;
 
-use App\User;
-use App\Salary;
-use App\PaySalery;
+use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
-class PaySaleryController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,9 @@ class PaySaleryController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('admin.salary.pay_salary', compact('users'));
+        $user = Auth::id();
+        $tasks = Task::where('user_id',$user)->get();
+        return view('employee.task.index', compact('tasks'));
     }
 
     /**
@@ -28,8 +29,7 @@ class PaySaleryController extends Controller
      */
     public function create()
     {
-        Salary::create($request->all());
-        return redirect()->back();
+        //
     }
 
     /**
@@ -40,27 +40,41 @@ class PaySaleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $task = Task::findOrFail($request->id);
+        if ($request->has('user_file')) {
+           $file = $request->file('user_file');
+           $store = $file->store('task');
+           $data['user_file'] = $store;
+        }
+        $data['status'] = 'Pending';
+        $task->update($data);
+        toast('success','Task has been sumited successfully');
+        return back();
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\PaySalery  $paySalery
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(PaySalery $paySalery)
+    public function show($id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $url = $task->attachment;
+        $file = Storage::download($url);
+        return $file;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\PaySalery  $paySalery
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(PaySalery $paySalery)
+    public function edit($id)
     {
         //
     }
@@ -69,10 +83,10 @@ class PaySaleryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PaySalery  $paySalery
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PaySalery $paySalery)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -80,10 +94,10 @@ class PaySaleryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PaySalery  $paySalery
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PaySalery $paySalery)
+    public function destroy($id)
     {
         //
     }

@@ -6,6 +6,7 @@ use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
 {
@@ -39,12 +40,16 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        // if($request->file('attachement')){
-        //     $filePath = $request->attachement->store('task','public');
-        //     $data['attachement'] = $filePath;
-        // }
+        $task = $request->all();
 
-        $store = Task::create($request->all());
+        // check if request has file attachment
+        if ($request->has('attachment')) {
+            $file = $request->file('attachment');
+            $url = Storage::put('task', $file);
+            $task['attachment'] = $url;
+        }
+
+        $store = Task::create($task);
 
         if ($store) {
             $alert = [
@@ -102,8 +107,8 @@ class TaskController extends Controller
      */
     public function destroy(Request $request)
     {
-        $id = $request->task_id;
-        $task = Task::find($id);
+        // return $request;
+        $task = Task::findOrFail($request->task_id);
         $task->delete();
             $alert = [
                 'alert-type' => 'success',

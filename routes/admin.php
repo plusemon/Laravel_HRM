@@ -13,44 +13,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','DashboardController@index');
-Route::get('profile','AdminProfile@index')->name('admin.profile');
+Route::middleware('admin')->group(function () {
+
+    Route::get('/','DashboardController@index');
+    Route::get('profile','AdminProfile@index')->name('admin.profile');
 
 
-//////////// AJAX REQUEST HANDLE ROUTES ////////////////////
-Route::get('get-designation', 'AjaxController@designation');
-Route::get('/check-email', 'AjaxController@checkEmail');
-Route::get('/check-id', 'AjaxController@checkId');
-//----------------------------------------------------------//
+    //////////// AJAX REQUEST HANDLE ROUTES ////////////////////
+    Route::get('get-designation', 'AjaxController@designation');
+    Route::get('/check-email', 'AjaxController@checkEmail');
+    Route::get('/check-id', 'AjaxController@checkId');
+    //----------------------------------------------------------//
 
-/////////////////// ALL RESOURECE ROUTES /////////////////////
-Route::resource('users','UserController');
-// SYSTEM
-Route::resource('departments','DepartmentController');
-Route::resource('countries','CountryController');
+    /////////////////// ALL RESOURECE ROUTES /////////////////////
+    Route::resource('users','UserController');
 
-// ATTENDANCE
-Route::resource('attendance', 'AttendanceController');
+    // SYSTEM
+    Route::resource('departments','DepartmentController');
+    Route::resource('countries','CountryController');
 
-// SALARIY
-Route::resource('salaries','SalaryController');
-Route::resource('payment', 'PaymentController');
+    // ATTENDANCE
+    Route::resource('attendance', 'AttendanceController');
 
-// EVENTS
-Route::resource('events', 'EventController');
+    // SALARIY
+    Route::resource('salaries','SalaryController');
+    Route::resource('payment', 'PaymentController');
 
-// TASK
-Route::resource('task','TaskController');
+    // EVENTS
+    Route::resource('events', 'EventController');
 
-// LEAVE APLICATION
-Route::resource('leave_types','LeaveTypeController');
-Route::resource('leave','LeaveController');
+    // TASK
+    Route::resource('task','TaskController');
 
-// AWARD
-Route::resource('award_categories','AwardCategoryController');
+    // LEAVE APLICATION
+    Route::resource('leave_types','LeaveTypeController');
+    Route::resource('leave','LeaveController');
 
-// NOTICE
-Route::resource('notice','NoticeBoardController');
-//-------------------------------------------------------------//
+    // AWARD
+    Route::resource('award_categories','AwardCategoryController');
 
+    // NOTICE
+    Route::resource('notice','NoticeBoardController');
 
+    //-------------------------------------------------------------//
+
+});

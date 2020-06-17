@@ -21,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.user.view_user', compact('users'));
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -35,7 +35,7 @@ class UserController extends Controller
         $departments = Department::all();
         $salaries = Salary::all();
         $countries = Country::all();
-        return view('admin.user.add_user', compact('departments', 'salaries', 'countries'));
+        return view('admin.user.create', compact('departments', 'salaries', 'countries'));
     }
 
     /**
@@ -95,7 +95,7 @@ class UserController extends Controller
         $countries = Country::all();
 
         $user = User::findOrFail($id);
-        return view('admin.user.edit_user', compact('departments','salaries','countries','user'));
+        return view('admin.user.edit', compact('departments','salaries','countries','user'));
     }
 
     /**
