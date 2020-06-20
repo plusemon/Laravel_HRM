@@ -45,11 +45,11 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
-                                    <select class="form-control" name="attendance" id="">
-                                        <option value="Present">Present</option>
-                                        <option value="Absent">Absent</option>
-                                        <option value="Leave">Leave</option>
-                                      </select>
+                                    <select name="attendance" id="present" class="form-control" required>
+                                        <option value="Present" @if($attendance->attendance='Present')seleted @endif>Present</option>
+                                        <option value="Absent" @if($attendance->attendance='Absent')seleted @endif>Absent</option>
+                                        <option value="Leave" @if($attendance->attendance='Leave')seleted @endif>Leave</option>
+                                    </select>
                                 </div>
                             </td>
                             <td>

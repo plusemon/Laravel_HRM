@@ -19,7 +19,6 @@
                     <h5>Request Leave Details</h5>
                     <thead class="thead-light">
                         <tr>
-                            <th>No</th>
                             <th>User Name</th>
                             <th>Leave Types</th>
                             <th>Start</th>
@@ -33,7 +32,6 @@
                     <tbody>
                         @foreach($leaves as $leave)
                             <tr>
-                                <td>1</td>
                                 <td>{{ $leave->user_id }}</td>
                                 <td>{{ $leave->types }}</td>
                                 <td>{{ $leave->start }}</td>
@@ -41,11 +39,11 @@
                                 <td>{{ $leave->duration }}</td>
                                 <td>{{ $leave->created_at }}</td>
                                 <td>{{ $leave->status }}</td>
-                                <td>@if($leave->status == 'Actived')
-
-                                    <a href="{{ url('admin/leave/'.$leave->id.'/edit?status=reject') }}" class="btn btn-sm btn-danger">Reject</a>
-                                    @else
+                                <td>@if($leave->status == 'Pending')
                                     <a href="{{ url('admin/leave/'.$leave->id.'/edit?status=active') }}" class="btn btn-sm btn-primary">Accept</a>
+                                    <a href="{{ url('admin/leave/'.$leave->id.'/edit?status=reject') }}" class="btn btn-sm btn-danger">Reject</a>
+                                    @elseif($leave->status == 'Rejected')
+                                    <a href="{{ url('admin/leave/'.$leave->id.'/edit?status=pending') }}" class="btn btn-sm btn-primary">Undo</a>
                                     @endif
                                 </td>
                             </tr>

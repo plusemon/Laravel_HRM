@@ -5,6 +5,7 @@ namespace App\Http\Controllers\employee;
 use App\Leave;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class LeaveController extends Controller
 {
@@ -15,8 +16,7 @@ class LeaveController extends Controller
      */
     public function index()
     {
-        // user id 123 by default for now
-        $leaves = Leave::where('user_id', 123)->get();
+        $leaves = Leave::where('user_id', Auth::id())->get();
         return view('employee.request_leave.index', compact('leaves'));
     }
 
@@ -38,6 +38,15 @@ class LeaveController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
+        // $user=$request->user_id;
+        // $types=$request->types;
+        $start=date($request->start);
+        $end=date($request->end);
+        $duration=$end-$start;
+        return $duration;
+
+
         $save = Leave::create($request->all());
         if($save){
             $alert = [

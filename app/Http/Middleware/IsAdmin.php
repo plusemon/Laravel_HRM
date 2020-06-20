@@ -18,7 +18,11 @@ class IsAdmin
     {
          if (Auth::user() &&  Auth::user()->type == 'Admin') {
                 return $next($request);
-         }
+         }elseif (Auth::user() &&  Auth::user()->type == 'Manager') {
+            return redirect('/manager');
+        }elseif (Auth::user() &&  Auth::user()->type == 'Employee') {
+            return redirect('/employee');
+        }
 
         return redirect('/login');
     }

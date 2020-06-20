@@ -58,7 +58,9 @@
                 </table>
                 </div>
               </div>
-            <a href="{{ url('admin/attendance/'.$att_date.'/edit') }}" class="btn btn-primary">Edit attendance</a>
+              @if($attendances)
+                <a href="{{ url('admin/attendance/'.$att_date.'/edit') }}" class="btn btn-primary">Edit attendance</a>
+              @endif
         </div>
     </div>
   <!--Add attendance Modal Center -->
@@ -92,5 +94,19 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
+@endsection
+
+
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+
+    $("#date").flatpickr({
+        maxDate: "today"
+    });
+</script>
+
 @endsection
 

@@ -96,7 +96,22 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        return "update";
+        // return $request;
+        $task=Task::find($request->id);
+        $update = $task->update($request->all());
+
+        if ($update) {
+            $alert = [
+                'alert-type' => 'success',
+                'message' => 'Task Completed successfully'
+            ];
+        }else{
+            $alert = [
+                'alert-type' => 'error',
+                'message' => 'Someting went wrong'
+            ];
+        }
+        return back()->with($alert);
     }
 
     /**

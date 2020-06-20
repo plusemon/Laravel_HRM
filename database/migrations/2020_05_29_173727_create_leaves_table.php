@@ -20,7 +20,7 @@ class CreateLeavesTable extends Migration
             $table->date('start');
             $table->date('end');
             $table->integer('duration');
-            $table->string('status');
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }

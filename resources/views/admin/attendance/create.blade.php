@@ -39,7 +39,6 @@
                         <th>Department</th>
                         <th>User Type</th>
                         <th>Present</th>
-                        <th>Leave</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -51,16 +50,13 @@
                             <td>{{ $user->department }}</td>
                             <td>{{ $user->type }}</td>
                             <td>
-                                <select name="attendance[{{ $user->id }}]" id="present" required>
-                                    <option value="present">Present</option>
-                                    <option value="absent">Absent</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="leave[{{ $user->id }}]" id="leave">
-                                    <option value="no">No</option>
-                                    <option value="leave">Leave</option>
-                                </select>
+                                <div class="form-group">
+                                    <select name="attendance[{{ $user->id }}]" id="present" class="form-control" required>
+                                        <option value="Present">Present</option>
+                                        <option value="Absent">Absent</option>
+                                        <option value="Leave">Leave</option>
+                                    </select>
+                                </div>
                             </td>
                         </tr>
                         @endforeach

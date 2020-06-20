@@ -21,7 +21,7 @@
             <div class="card-body">
                 <form action="{{ url('employee/leave') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="user_id" value="123" id="">
+                    <input type="hidden" name="user_id" value="{{ Auth::id() }}" id="">
                     <div class="form-group">
                         <label>Leave Types</label>
                         <select class="form-control" name="types">

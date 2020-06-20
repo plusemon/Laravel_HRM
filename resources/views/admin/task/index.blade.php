@@ -17,13 +17,13 @@
             <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <a href="{{ url('admin/task/create') }}"><button type="button"
-                            class="btn btn-success" data-toggle="modal">Add Task</button></a>
+                            class="btn btn-success" data-toggle="modal">Add New Task</button></a>
                 </div>
                 <div class="table-responsive p-3">
                     <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                         <thead class="thead-light">
                             <tr>
-                                <th>User (id)</th>
+                                <th>User</th>
                                 <th>Subject</th>
                                 <th>Duration</th>
                                 <th>Status</th>
@@ -39,13 +39,21 @@
                                     <td>{{ $task->status }}</td>
                                     <td>
                                         @if($task->status == 'Pending')
-                                        <button type="button" class="btn btn-warning" data-toggle="modal"
-                                        data-target="#updateTask" id="#updateTaskBoard" data-subject="{{ $task->subject }}" data-description="{{ $task->description }}"><i
-                                            class="fas fa-user-edit">Compelete</i></button>
+                                            <form
+                                                action="{{ url('admin/task/') }}/{{ $task->id }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="status" value="Compeleted">
+                                                <input type="hidden" name="id" value="{{ $task->id }}">
+                                                <button type="submit" class="btn btn-primary">Compelete</button>
+                                            </form>
                                         @else
-                                        <button type="button" class="btn btn-warning" data-toggle="modal"
-                                            data-target="#updateTask" id="#updateTaskBoard" data-subject="{{ $task->subject }}" data-description="{{ $task->description }}"><i
-                                                class="fas fa-user-edit">Update</i></button>
+                                            <button type="button" class="btn btn-warning" data-toggle="modal"
+                                                data-target="#updateTask" id="#updateTaskBoard"
+                                                data-subject="{{ $task->subject }}"
+                                                data-description="{{ $task->description }}"><i
+                                                    class="fas fa-user-edit">Update</i></button>
                                         @endif
                                         <button type="button" class="btn btn-danger" data-toggle="modal"
                                             data-target="#deleteTask" id="#deleteTaskBoard"
@@ -81,26 +89,32 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label class="mb-3 font-weight-bold">Subject</label>
-                    <input name="subject" id="subject" class="form-control  mb-3" type="text" placeholder="Subject">
-
-                    <label class="mb-3 font-weight-bold">Duration</label>
-                    <select class="form-control mb-3 font-weight-bold">
-                        <option>1 Week</option>
-                        <option>1 Month</option>
-                        <option>3 Month</option>
-                        <option>6 Month</option>
-                        <option>1 Year</option>
-                    </select>
-                    <label class="mb-3 font-weight-bold">Description</label>
-                    <textarea rows="8" textarea class="form-control mb-3" id="description"></textarea>
-
-                    <label class="mb-3 font-weight-bold">Status</label>
-                    <select name="status" class="form-control mb-3 font-weight-bold" placeholder="Status">
-                        <option>Completed</option>
-                        <option>Pending</option>
-                        <option>Rejected</option>
-                    </select>
+                    <div class="form-group">
+                        <label class="mb-3 font-weight-bold">Subject</label>
+                        <input name="subject" id="subject" class="form-control  mb-3" type="text" placeholder="Subject">
+                    </div>
+                    <div class="form-group">
+                        <label class="mb-3 font-weight-bold">Duration</label>
+                        <select class="form-control mb-3 font-weight-bold">
+                            <option>1 Week</option>
+                            <option>1 Month</option>
+                            <option>3 Month</option>
+                            <option>6 Month</option>
+                            <option>1 Year</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="mb-3 font-weight-bold">Description</label>
+                        <textarea rows="8" textarea class="form-control mb-3" id="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="mb-3 font-weight-bold">Status</label>
+                        <select name="status" class="form-control mb-3 font-weight-bold" placeholder="Status">
+                            <option>Completed</option>
+                            <option>Pending</option>
+                            <option>Rejected</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
