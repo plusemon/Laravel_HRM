@@ -39,7 +39,7 @@
                     <tbody>
                         @foreach($leaves as $leave)
                             <tr>
-                                <td>{{ $leave->user_id }}</td>
+                                <td>{{ $leave->user->name }}</td>
                                 <td>{{ $leave->types }}</td>
                                 <td>{{ $leave->duration }}</td>
                                 <td>{{ $leave->dates }}</td>
@@ -86,7 +86,7 @@
                         <div class="fas fa-calendar"></div>
                         <input type="date" name="dates" id="dates" class="form-control" required>
                     </div>
-                    {{--  <p id="max_show2" class="text-danger" style="display: none;">Maximum <span id="max_num2">%</span> Days Allowed!</p>  --}}
+                    <p id="max_show2" class="text-danger" style="display: none;">Maximum <span id="max_num2">%</span> Days Allowed!</p>
 
                     <div class="form-group">
                         <button id="addbtn" type="submit" class="btn btn-success">Send Request</button>
@@ -108,50 +108,50 @@
 @endsection
 
 @section('scripts')
-    <script src="{{asset('/vendor/validation/jquery.validate.min.js')}}"></script>
-    <script src="{{ asset('/vendor/validation/custom.rules.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('/vendor/validation/validate.css') }}">
-
-
-
 
 {{--  /*-----Leave Modal Update Scripts-----*/  --}}
-    <script>
-        $('#types').on('change', function (event) {
-            var max = $('#max_leave').data('max');
-            $('#max_show').show();
-            $('#max_num').html(max);
-        });
+<script>
 
+    $('#leaveForm').on('submit', function (event) {
+        var getmax = $('#max_leave').data('max');
+        var selmax = $('#dates').val();
+        var gmax = selmax.split(', ');
+        if(gmax.length > getmax){
+            $('#max_num2').html(getmax);
+            $('#max_show2').fadeIn();
+
+            event.preventDefault();
+        }
+        if(selmax.length > 1){
+        }else{
+            event.preventDefault();
+        }
+    });
+
+
+    $('#types').on('change', function (event) {
+        var max = $('#max_leave').data('max');
+        $('#max_show').fadeIn();
+        $('#max_num').html(max);
+    });
+
+    $('#dates').on('change', function (event) {
+        var getmax = $('#max_leave').data('max');
+        var selmax = $('#dates').val();
+        var selmax = selmax.split(', ');
+        if(selmax.length > getmax){
+            $('#max_num2').html(getmax);
+            $('#max_show2').fadeIn();
+            }else{
+            $('#max_show2').fadeOut();
+        }
+    });
 
     $("#dates").flatpickr({
         mode: "multiple",
         dateFormat: "Y-m-d",
         minDate: new Date().fp_incr(1),
-
     });
-
-
-    $("#leaveForm").validate({
-        rules: {
-            types: "required",
-            dates: {
-                required: true,
-                maxlength: 36,
-                minlength: 10
-                }
-        },
-        // Specify validation error messages
-        messages: {
-            types: "Please select leave types",
-            dates: "Maximum number of leave is over"
-        },
-        submitHandler: function(form) {
-        form.submit()
-            {{--  alert('Submitted');  --}}
-        }
-    });
-
 
 </script>
 @endsection
