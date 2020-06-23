@@ -73,8 +73,8 @@
                                             Edit</i></button>
                                 </a>
                                 <button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#deleteUser" id="#deleteUserBoard"
-                                            data-user_id="{{ $user->id }}"><i class="fas fa-trash">Delete</i></button>
+                                data-target="#deleteUser" id="#deleteUserBoard"
+                                data-user_id="{{ $user->id }}"><i class="fas fa-trash">Delete</i></button>
                             </td>
                         </tr>
                         @empty

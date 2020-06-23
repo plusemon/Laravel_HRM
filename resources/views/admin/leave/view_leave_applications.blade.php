@@ -19,10 +19,9 @@
                     <h5>Request Leave Details</h5>
                     <thead class="thead-light">
                         <tr>
-                            <th>User Name</th>
-                            <th>Leave Types</th>
-                            <th>Start</th>
-                            <th>End</th>
+                            <th>User</th>
+                            <th>Types</th>
+                            <th>Dates</th>
                             <th>Duration</th>
                             <th>Created</th>
                             <th>Status</th>
@@ -34,8 +33,7 @@
                             <tr>
                                 <td>{{ $leave->user_id }}</td>
                                 <td>{{ $leave->types }}</td>
-                                <td>{{ $leave->start }}</td>
-                                <td>{{ $leave->end }}</td>
+                                <td>{{ $leave->dates }}</td>
                                 <td>{{ $leave->duration }}</td>
                                 <td>{{ $leave->created_at }}</td>
                                 <td>{{ $leave->status }}</td>

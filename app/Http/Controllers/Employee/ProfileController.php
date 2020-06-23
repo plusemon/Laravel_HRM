@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -14,7 +17,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        $user=Auth::user();
+        return view('employee.profile.index',compact('user'));
     }
 
     /**
@@ -69,7 +73,16 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $user = User::findOrFail($id);
+        // Storage::unlink($user->avater);
+
+        if($request->file('avater')){
+            $image = $request->avater->store('avater','public');
+            $data['avater'] = $image;
+        }
+        $update = $user->update($data);
+        return 'success';
     }
 
     /**

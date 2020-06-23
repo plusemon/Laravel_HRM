@@ -21,12 +21,6 @@
                         @csrf
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         {{-- <a href="#"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addAttendance"id="#addAttendanceBoard"><i class="fas fa-user-edit">Add Attendance</i></button></a> --}}
-
-
-                    <div class="form-group col-6 m-auto">
-                        <h3>Pick an Attendance date</h3>
-                        <input type="date" name="att_date" id="att_date" class="form-control" required>
-                    </div>
             </div>
               <div class="card mb-4">
 
@@ -42,7 +36,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @forelse ($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
                             <input type="hidden" name="user_id[]" value="{{ $user->id }}">
@@ -54,47 +48,28 @@
                                     <select name="attendance[{{ $user->id }}]" id="present" class="form-control" required>
                                         <option value="Present">Present</option>
                                         <option value="Absent">Absent</option>
-                                        <option value="Leave">Leave</option>
                                     </select>
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td class="text-center" colspan="5">
+                                    <h4>No Active User Found!</h4>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
                 </div>
               </div>
-            <button class="btn btn-primary" type="submit">Save Todays Attendance</button>
+              @empty(!$users)
+                <button type="submit" class="btn btn-primary">Take Todays Attendance</button>
+              @endempty
         </form>
     </div>
 </div>
-  <!--Add Attendance Modal Center -->
-  <div class="modal fade" id="addAttendance" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable" role="document">
-          <div class="modal-content">
 
-             <div class="modal-header">
-                  <h5 class="modal-title" id="addAttendanceBoard">Add Attendance</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-              </div>
-
-                <div class="modal-body">
-                    <label class="mb-3 font-weight-bold">Add Attendance Date</label>
-                    <input class="form-control  mb-3" type="date" placeholder="Update Attendance Date">
-                </div>
-
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <a href="#"><button type="button" class="btn btn-warning">Add</button></a>
-
-          </div>
-
-        </div>
-      </div>
-  </div>
 <!-- Scroll to top -->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>

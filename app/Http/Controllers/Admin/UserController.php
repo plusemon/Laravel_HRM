@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Attendance;
 use App\User;
 use App\Salary;
 use App\Country;
@@ -9,6 +10,9 @@ use App\Department;
 use PhpParser\Builder\Use_;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Leave;
+use App\Task;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -20,7 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::all()->skip(Auth::id());
         return view('admin.user.index', compact('users'));
     }
 
@@ -139,13 +143,24 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-        //  return $request;
          $user = User::findOrFail($request->user_id);
-         $user->delete();
-             $alert = [
-                 'alert-type' => 'success',
-                 'message' => 'User Deleted Successfully'
-             ];
+
+         // delete user data
+        $attendances = Attendance::where('user_id',$user)->pluck('id');
+        $attendances->delete();
+
+        $leaves = Leave::where('user_id',$user)->pluck('id');
+        $leaves->delete();
+
+        $tasks = Task::where('user_id',$user)->pluck('id');
+        $tasks->delete();
+
+
+        $user->delete();
+        $alert = [
+            'alert-type' => 'success',
+            'message' => 'User Deleted Successfully'
+        ];
          return back()->with($alert);
     }
 

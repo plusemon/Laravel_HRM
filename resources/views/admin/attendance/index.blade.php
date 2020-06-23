@@ -19,14 +19,13 @@
                 <div class="col-lg-12 text-center">
                     <form action="{{ url('admin/attendance') }}" method="GET">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <div class="form-group col-6 m-auto">
-                            <h3>Pick an attendance date {{ '('.$att_date.')' }}</h3>
-                            <input type="date" name="date" value="{{ $att_date }}" id="date" class="form-control" required>
-                            <button class="btn btn-primary" type="submit">View</button>
-                        </div>
-            </div>
+                            <div class="form-group col-6 m-auto">
+                                <h3>Pick an attendance date {{ $att_date ?? '' }}</h3>
+                                <input type="date" name="date" value="{{ $att_date ?? '' }}" id="date" class="form-control" required>
+                                <button class="btn btn-primary" type="submit">View</button>
+                            </div>
+                     </div>
               <div class="card mb-4">
-
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush table-hover">
                     <thead class="thead-light">
@@ -38,7 +37,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @forelse($attendances as $attendance)
+                        @forelse($attendances ?? '' as $attendance)
                             <tr>
                             <td>{{ $attendance->user_id }}</td>
                             <td>{{ $attendance->user->name }}</td>
@@ -58,7 +57,7 @@
                 </table>
                 </div>
               </div>
-              @if($attendances)
+              @if($attendances ?? '')
                 <a href="{{ url('admin/attendance/'.$att_date.'/edit') }}" class="btn btn-primary">Edit attendance</a>
               @endif
         </div>

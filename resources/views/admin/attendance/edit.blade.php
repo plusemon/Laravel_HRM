@@ -72,33 +72,7 @@
               </div>
         </div>
     </div>
-  <!--Add attendance Modal Center -->
-  <div class="modal fade" id="addattendance" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable" role="document">
-          <div class="modal-content">
-
-             <div class="modal-header">
-                  <h5 class="modal-title" id="addattendanceBoard">Add attendance</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-              </div>
-
-                <div class="modal-body">
-                    <label class="mb-3 font-weight-bold">Add attendance Date</label>
-                    <input class="form-control  mb-3" type="date" placeholder="Update attendance Date">
-                </div>
-
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <a href="#"><button type="button" class="btn btn-warning">Add</button></a>
-
-          </div>
-
-        </div>
-      </div>
-  </div>
+  
 <!-- Scroll to top -->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\employee;
 
+use App\Attendance;
 use App\Leave;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\LeaveType;
 use Illuminate\Support\Facades\Auth;
 
 class LeaveController extends Controller
@@ -17,7 +19,8 @@ class LeaveController extends Controller
     public function index()
     {
         $leaves = Leave::where('user_id', Auth::id())->get();
-        return view('employee.request_leave.index', compact('leaves'));
+        $types = LeaveType::all();
+        return view('employee.request_leave.index', compact('leaves', 'types'));
     }
 
     /**
@@ -38,16 +41,25 @@ class LeaveController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
-        // $user=$request->user_id;
-        // $types=$request->types;
-        $start=date($request->start);
-        $end=date($request->end);
-        $duration=$end-$start;
-        return $duration;
+        $count = explode(',',$request->dates);
+        $duration = count($count);
+
+        $data = $request->all();
+        $data['duration'] = $duration;
+
+        Leave::create($data);
 
 
-        $save = Leave::create($request->all());
+        foreach ($count as $date) {
+            $att = [
+                        'user_id' => $request->user_id,
+                        'att_date' => $date,
+                        'attendance' => 'Leave',
+                    ];
+            $save = Attendance::create($att);
+        }
+
+        
         if($save){
             $alert = [
                 'alert-type' => 'sucess',

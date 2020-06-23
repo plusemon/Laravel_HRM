@@ -23,7 +23,7 @@
     <div class="container">
         <h2>Create a new Event</h2>
         <hr />
-        <form action="{{ route('events.store') }}" method="post">
+        <form action="{{ url('admin/events') }}" method="post">
             @csrf()
             <input type="hidden" name="start" class="date" value="{{ $date }}" />
             <input type="hidden" name="end" class="date" value="{{ $date }}" />

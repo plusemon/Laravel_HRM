@@ -23,6 +23,7 @@ Route::middleware('admin')->group(function () {
     Route::get('get-designation', 'AjaxController@designation');
     Route::get('/check-email', 'AjaxController@checkEmail');
     Route::get('/check-id', 'AjaxController@checkId');
+    Route::post('/events/update', 'AjaxController@event');
     //----------------------------------------------------------//
 
     /////////////////// ALL RESOURECE ROUTES /////////////////////

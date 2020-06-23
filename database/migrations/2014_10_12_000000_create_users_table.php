@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('type');
             $table->string('email',100)->unique();
-            $table->string('password')->default('$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'); // password
+            $table->string('password')->default(bcrypt('123456'));
             $table->bigInteger('nid');
             $table->string('department');
             $table->string('designation');
@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('country');
             $table->string('join');
             $table->timestamp('email_verified_at')->nullable();
-            $table->boolean('status')->nullable();
+            $table->boolean('status')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

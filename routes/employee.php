@@ -1,33 +1,31 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 
 
 /*Employees Section Route*/
+
+
+Route::middleware('employee')->group(function () {
+
+// Profile
 Route::get('/', function () {
-    return view('employee.index');
-});
-Route::get('profile', function () {
-    return view('employee.profile.index');
+return view('employee.index');
 });
 
+Route::resource('profile', 'ProfileController');
+Route::get('/storage/task/{file}', 'TaskController@show');
+// Leave
 Route::resource('leave','LeaveController');
 
-Route::get('attandence', function () {
-    return view('employee.attandence.index');
-});
-Route::get('events', function () {
-    return view('employee.events.index');
-});
+// Route::resource('event', 'EventController');
+
+// Route::resource('attendance', 'AttendanceController');
 
 Route::resource('task', 'TaskController');
 
+// Route::resource('notice', 'noticeController');
 
-Route::get('/storage/task/{file}', 'TaskController@show');
+// Route::resource('award', 'awardController');
 
-Route::get('index', function () {
-    return view('employee.award.index');
-});
-
-Route::get('notice', function () {
-    return view('employee.notice.index');
 });

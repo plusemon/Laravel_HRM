@@ -189,10 +189,7 @@
     <script src="{{asset('/vendor/validation/jquery.validate.min.js')}}"></script>
     <script src="{{ asset('/vendor/validation/custom.rules.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('/vendor/validation/validate.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-
-
+   
     <script>
         $(document).ready(function () {
             refresh();

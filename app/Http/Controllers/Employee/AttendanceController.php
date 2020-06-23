@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AttandenceController extends Controller
+class AttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class AttandenceController extends Controller
      */
     public function index()
     {
-        return view('admin.attandence.index');
+        //
     }
 
     /**
@@ -24,7 +24,7 @@ class AttandenceController extends Controller
      */
     public function create()
     {
-    return view('admin.attandence.add_attandence');
+        //
     }
 
     /**
@@ -57,7 +57,7 @@ class AttandenceController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.attandence.update_attandence');
+        //
     }
 
     /**

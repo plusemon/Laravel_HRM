@@ -73,47 +73,49 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ url('admin/payment') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label>User ID</label>
-                    <div class="fas fa-user"></div>
-                    <select class="form-control" name="user_id" id="user_id">
-                        @foreach($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Month</label>
-                    <select class="form-control" name="month" required>
-                        <option value="">Select Month</option>
-                        <option value="january">January</option>
-                        <option value="february">February</option>
-                        <option value="march">March</option>
-                        <option value="april">April</option>
-                        <option value="may">May</option>
-                        <option value="june">June</option>
-                        <option value="july">July</option>
-                        <option value="august">August</option>
-                        <option value="september">September</option>
-                        <option value="october">October</option>
-                        <option value="november">November</option>
-                        <option value="december">December</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Status</label>
-                    <select class="form-control" name="status">
-                        <option value="paid">Paid</option>
-                        <option value="pending">Pending</option>
-                        <option value="reject">Reject</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">Payment</button>
-                </div>
-            </form>
+            <div class="modal-body">
+                <form action="{{ url('admin/payment') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label>User ID</label>
+                        <div class="fas fa-user"></div>
+                        <select class="form-control" name="user_id" id="user_id">
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Month</label>
+                        <select class="form-control" name="month" required>
+                            <option value="">Select Month</option>
+                            <option value="january">January</option>
+                            <option value="february">February</option>
+                            <option value="march">March</option>
+                            <option value="april">April</option>
+                            <option value="may">May</option>
+                            <option value="june">June</option>
+                            <option value="july">July</option>
+                            <option value="august">August</option>
+                            <option value="september">September</option>
+                            <option value="october">October</option>
+                            <option value="november">November</option>
+                            <option value="december">December</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="form-control" name="status">
+                            <option value="paid">Paid</option>
+                            <option value="pending">Pending</option>
+                            <option value="reject">Reject</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Payment</button>
+                    </div>
+                </form>
+            </div>
 
         </div>
     </div>
@@ -131,7 +133,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ url('admin/payment/update') }}" method="POST"
+            <div class="modal-body">
+                <form action="{{ url('admin/payment/update') }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
                 @method('put')
@@ -148,6 +151,7 @@
                     <button type="submit" class="btn btn-warning">Update</button>
                 </div>
             </form>
+            </div>
         </div>
     </div>
 </div>
