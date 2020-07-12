@@ -76,7 +76,7 @@
                         <select class="form-control" name="types" id="types">
                             <option value="">Select Leave Type</option>
                             @foreach($types as $type)
-                                <option id="max_leave" data-max="{{ $type->num_leaves }}" value="{{ $type->leave_typ }}">{{ $type->leave_typ }}</option>
+                                <option data-max="{{ $type->num_leaves }}" value="{{ $type->leave_typ }}">{{ $type->leave_typ }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -130,7 +130,10 @@
 
 
     $('#types').on('change', function (event) {
-        var max = $('#max_leave').data('max');
+            var button = $(event.relatedTarget);
+
+    
+        var max = button.data('max');
         $('#max_show').fadeIn();
         $('#max_num').html(max);
     });
